@@ -10,3 +10,8 @@ set path+=**
 
 syntax on
 colorscheme abstract
+
+nmap <Left> <nop>
+nmap <Right> <nop>
+nmap <Up> <nop>
+nmap <Down> <nop>
