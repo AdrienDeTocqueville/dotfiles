@@ -4,9 +4,8 @@ set hls
 set ruler
 set number
 set wildmenu
+set wildmode=longest,list,full
 set showcmd
-
-set path+=**
 
 syntax on
 colorscheme abstract
