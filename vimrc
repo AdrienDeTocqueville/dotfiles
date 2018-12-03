@@ -4,7 +4,7 @@ set hls
 set ruler
 set number
 set wildmenu
-set wildmode=longest,list,full
+set wildmode=longest,full
 set showcmd
 
 syntax on
