@@ -25,6 +25,6 @@ map <CR> o<Esc>
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F11> :mksession! .vimsession<CR> \| :qa<CR>
 
-ab #include #include
-ab #ifndef #ifndef
-ab #endif #endif
+ab #i #include
+ab #n #ifndef
+ab #e #endif

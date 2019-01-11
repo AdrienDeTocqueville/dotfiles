@@ -1,14 +1,3 @@
-export ZSH="/Users/agrouard/.oh-my-zsh"
-
-ZSH_THEME="robbyrussell"
-
-plugins=(
-  git
-)
-
-source $ZSH/oh-my-zsh.sh
-
-
 alias ga="git add .; git status"
 alias gs="git status"
 
