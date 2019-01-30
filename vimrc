@@ -6,6 +6,9 @@ set number
 set wildmenu
 set wildmode=longest,full
 set showcmd
+set splitbelow
+set splitright
+set switchbuf=useopen,usetab
 
 syntax on
 
@@ -28,3 +31,9 @@ nmap <F11> :mksession! .vimsession<CR> \| :qa<CR>
 ab #i #include
 ab #n #ifndef
 ab #e #endif
+
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set number
+    autocmd WinLeave * set nonumber
+augroup END
