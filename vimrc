@@ -8,7 +8,7 @@ set wildmode=longest,full
 set showcmd
 set splitbelow
 set splitright
-set switchbuf=useopen,usetab
+set noswapfile
 
 syntax on
 
@@ -22,8 +22,6 @@ nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
-
-map <CR> o<Esc>
 
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F11> :mksession! .vimsession<CR> \| :qa<CR>
