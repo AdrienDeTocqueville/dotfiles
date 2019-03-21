@@ -24,6 +24,8 @@ nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <F4> :exec("tag ".expand("<cword>"))<CR>
 nmap <F11> :mksession! .vimsession<CR> \| :qa<CR>
 
 ab #i #include
