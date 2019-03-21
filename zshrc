@@ -16,3 +16,24 @@ alias dirs="dirs -vp"
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} $(git_prompt_info)"
 export SCREENDIR=$HOME/.screen
+
+
+#Vi mode and prompt
+set -o vi
+
+function set-prompt () {
+    case ${KEYMAP} in
+      (vicmd)      VI_MODE="green" ;;
+      (main|viins) VI_MODE="cyan" ;;
+      (*)          VI_MODE="green" ;;
+    esac
+    export PROMPT="${ret_status} %{$fg[$VI_MODE]%}%2~%{$reset_color%} $(git_prompt_info)"
+}
+
+function zle-line-init zle-keymap-select {
+    set-prompt
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
