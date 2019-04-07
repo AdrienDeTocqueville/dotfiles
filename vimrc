@@ -5,6 +5,7 @@ set ruler
 set number
 set wildmenu
 set wildmode=longest,full
+set wildignore=*.o,*~,*.pyc
 set showcmd
 set splitbelow
 set splitright
