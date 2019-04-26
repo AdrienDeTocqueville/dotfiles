@@ -34,7 +34,7 @@ ab #n #ifndef
 ab #e #endif
 
 augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set number
-    autocmd WinLeave * set nonumber
+	autocmd!
+	autocmd WinEnter * set number
+	autocmd WinLeave * set nonumber
 augroup END
