@@ -15,10 +15,6 @@ set cursorline
 syntax on
 
 nmap <v_K> <nop>
-nmap <Left> <nop>
-nmap <Right> <nop>
-nmap <Up> <nop>
-nmap <Down> <nop>
 
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
