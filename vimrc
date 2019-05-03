@@ -10,6 +10,7 @@ set showcmd
 set splitbelow
 set splitright
 set noswapfile
+set cursorline
 
 syntax on
 
@@ -38,3 +39,10 @@ augroup BgHighlight
 	autocmd WinEnter * set number
 	autocmd WinLeave * set nonumber
 augroup END
+hi clear CursorLine
+hi CursorLineNR ctermfg=Red cterm=bold
+
+
+#set shiftwidth=0
+#set tabstop=4
+#set expandtab
