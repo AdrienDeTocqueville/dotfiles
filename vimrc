@@ -13,6 +13,10 @@ set noswapfile
 set cursorline
 
 syntax on
+colorscheme abstract
+
+hi clear CursorLine
+hi CursorLineNR ctermfg=Red cterm=bold
 
 nmap <v_K> <nop>
 
@@ -35,10 +39,9 @@ augroup BgHighlight
 	autocmd WinEnter * set number
 	autocmd WinLeave * set nonumber
 augroup END
-hi clear CursorLine
-hi CursorLineNR ctermfg=Red cterm=bold
 
 
-#set shiftwidth=0
+set shiftwidth=0
+
 #set tabstop=4
 #set expandtab
