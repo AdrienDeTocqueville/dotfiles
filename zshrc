@@ -17,8 +17,8 @@ alias gu="git add -u; git status"
 alias gs="git status"
 
 alias l="ls -l"
-alias ll="ls -al"
-alias lc="clear; ls -l"
+alias ll="ls -la"
+alias lc="clear; clear; ls -l"
 alias mc="clear; clear; make"
 
 alias k="gcc -Wall -Werror -Wextra"
@@ -34,7 +34,7 @@ alias arduino="/mnt/d/Softwares/Arduino/arduino.exe"
 alias cl="clip.exe"
 alias open="explorer.exe"
 
-export PROMPT="${ret_status} %{$fg[cyan]%}%2~%{$reset_color%} $(git_prompt_info)"
+export PROMPT="${ret_status} %{$fg[cyan]%}%2~%{$reset_color%} "
 export SCREENDIR=$HOME/.screen
 export DISPLAY=localhost:0.0
 
