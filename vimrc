@@ -18,7 +18,7 @@ colorscheme abstract
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
 
-nmap <v_K> <nop>
+map K <Nop>
 
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
@@ -42,6 +42,5 @@ augroup END
 
 
 set shiftwidth=0
-
-#set tabstop=4
-#set expandtab
+"set tabstop=4
+"set expandtab

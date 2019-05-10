@@ -27,6 +27,7 @@ alias vg="valgrind --leak-check=full"
 alias vim="vim -O"
 alias vi="vim -S .vimsession"
 alias make="make -j"
+alias gdb="gdb -q"
 alias dirs="dirs -vp"
 
 alias mongod="/mnt/d/Softwares/MongoDB/bin/mongod.exe"
