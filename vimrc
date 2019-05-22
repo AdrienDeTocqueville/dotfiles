@@ -14,7 +14,7 @@ set cursorline
 set shiftwidth=0
 
 syntax on
-colorscheme abstract
+silent! colorscheme abstract
 
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
