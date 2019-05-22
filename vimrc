@@ -11,6 +11,7 @@ set splitbelow
 set splitright
 set noswapfile
 set cursorline
+set shiftwidth=0
 
 syntax on
 colorscheme abstract
@@ -41,6 +42,8 @@ augroup BgHighlight
 augroup END
 
 
-set shiftwidth=0
-"set tabstop=4
-"set expandtab
+autocmd FileType python setlocal tabstop=4 expandtab
+autocmd BufNewFile,BufRead *.vert set syntax=cs
+autocmd BufNewFile,BufRead *.tesc set syntax=cs
+autocmd BufNewFile,BufRead *.tese set syntax=cs
+autocmd BufNewFile,BufRead *.frag set syntax=cs
