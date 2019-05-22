@@ -16,17 +16,17 @@ alias ga="git add .; git status"
 alias gu="git add -u; git status"
 alias gs="git status"
 
-alias l="ls -l"
-alias ll="ls -la"
-alias lc="clear; clear; ls -l"
-alias mc="clear; clear; make"
+alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M  '"
+alias l="ls"
+alias ll="ls -a"
+alias lc="clear; clear; ls"
 
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
 
 alias vim="vim -O"
 alias vi="vim -S .vimsession"
-alias make="make -j"
+alias make="make -j4"
 alias gdb="gdb -q"
 alias dirs="dirs -vp"
 
