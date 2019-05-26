@@ -7,4 +7,8 @@
 	email = adrien.detocqueville@gmail.com
 	name = Adrien de Tocqueville
 [core]
+	autocrlf = false
+	eol = lf
+[credential]
+	helper = store
 	editor = vim

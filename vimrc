@@ -47,3 +47,5 @@ autocmd BufNewFile,BufRead *.vert set syntax=cs
 autocmd BufNewFile,BufRead *.tesc set syntax=cs
 autocmd BufNewFile,BufRead *.tese set syntax=cs
 autocmd BufNewFile,BufRead *.frag set syntax=cs
+
+match ErrorMsg '\%>80v.\+'
