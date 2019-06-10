@@ -13,10 +13,11 @@ source $ZSH/oh-my-zsh.sh
 
 
 alias ga="git add .; git status"
+alias gap="git add -p"
 alias gu="git add -u; git status"
 alias gs="git status"
 
-alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M  '"
+alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
 alias ll="ls -a"
 alias lc="clear; clear; ls"
@@ -29,17 +30,13 @@ alias vi="vim -S .vimsession"
 alias make="make -j4"
 alias gdb="gdb -q"
 alias dirs="dirs -vp"
+alias df="df -h"
+alias du="du -sh"
 
-alias mongod="/mnt/d/Softwares/MongoDB/bin/mongod.exe"
-alias arduino="/mnt/d/Softwares/Arduino/arduino.exe"
 alias cl="clip.exe"
 alias open="explorer.exe"
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
-export SCREENDIR=$HOME/.screen
-export DISPLAY=localhost:0.0
 
-if [[ ! $TMUX ]]
-then
-	cd /mnt/d/Programs
-fi
+
+source $HOME/.extrc
