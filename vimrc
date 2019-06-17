@@ -12,12 +12,14 @@ set splitright
 set noswapfile
 set cursorline
 set shiftwidth=0
+set backspace=indent,eol,start
 
 syntax on
 silent! colorscheme abstract
 
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
+hi CursorLine color=236 cterm=NONE
 
 map K <Nop>
 
@@ -37,8 +39,8 @@ ab #e #endif
 
 augroup BgHighlight
 	autocmd!
-	autocmd WinEnter * set number
-	autocmd WinLeave * set nonumber
+	autocmd WinEnter * set cul
+	autocmd WinLeave * set nocul
 augroup END
 
 
