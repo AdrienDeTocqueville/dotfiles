@@ -12,6 +12,7 @@ set splitright
 set noswapfile
 set cursorline
 set shiftwidth=0
+set laststatus=2
 
 syntax on
 silent! colorscheme abstract
@@ -37,8 +38,8 @@ ab #e #endif
 
 augroup BgHighlight
 	autocmd!
-	autocmd WinEnter * set number
-	autocmd WinLeave * set nonumber
+	autocmd WinEnter * set cul
+	autocmd WinLeave * set nocul
 augroup END
 
 
