@@ -13,12 +13,14 @@ set noswapfile
 set cursorline
 set shiftwidth=0
 set laststatus=2
+set backspace=indent,eol,start
 
 syntax on
 silent! colorscheme abstract
 
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
+hi CursorLine ctermbg=236 cterm=NONE
 
 map K <Nop>
 
