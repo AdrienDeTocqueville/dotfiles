@@ -16,6 +16,7 @@ alias ga="git add .; git status"
 alias gap="git add -p"
 alias gu="git add -u; git status"
 alias gs="git status"
+alias gg="git grep -n"
 
 alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
@@ -32,6 +33,8 @@ alias gdb="gdb -q"
 alias dirs="dirs -vp"
 alias df="df -h"
 alias du="du -sh"
+
+alias ctags="ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q ."
 
 alias cl="clip.exe"
 alias open="explorer.exe"
