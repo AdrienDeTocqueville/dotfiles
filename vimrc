@@ -14,6 +14,7 @@ set noswapfile
 set cursorline
 set shiftwidth=0
 set laststatus=2
+set scrolloff=5
 set backspace=indent,eol,start
 
 filetype plugin on
