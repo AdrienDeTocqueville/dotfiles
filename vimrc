@@ -4,6 +4,7 @@ set hls
 set nocp
 set ruler
 set number
+set hidden
 set wildmenu
 set wildmode=longest,full
 set wildignore=*.o,*~,*.pyc

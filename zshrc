@@ -22,6 +22,7 @@ alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
 alias ll="ls -a"
 alias lc="clear; clear; ls"
+alias dir="dir --color"
 
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
@@ -34,7 +35,7 @@ alias dirs="dirs -vp"
 alias df="df -h"
 alias du="du -sh"
 
-alias ctags="ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q ."
+alias ctags="ctags -R --sort=yes --fields=+iaS --extra=+q ."
 
 alias cl="clip.exe"
 alias open="explorer.exe"
