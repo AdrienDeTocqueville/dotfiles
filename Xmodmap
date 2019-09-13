@@ -1,0 +1,12 @@
+! Remap caps lock to escape
+clear lock
+keycode 9 = Escape NoSymbol Escape
+keycode 66 = Escape NoSymbol Escape
+
+! Swap control and alt
+clear control
+clear mod1
+keycode 37 = Alt_L Meta_L
+keycode 64 = Control_L
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L

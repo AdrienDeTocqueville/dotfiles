@@ -57,8 +57,6 @@ autocmd BufNewFile,BufRead *.tesc set syntax=cs
 autocmd BufNewFile,BufRead *.tese set syntax=cs
 autocmd BufNewFile,BufRead *.frag set syntax=cs
 
-match ErrorMsg '\%>80v.\+'
-
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
