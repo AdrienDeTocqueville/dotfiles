@@ -1,3 +1,4 @@
+# ZSH things
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
@@ -12,13 +13,24 @@ source $ZSH/oh-my-zsh.sh
 #source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
+
+# Windows aliases
+alias cl="clip.exe"
+alias open="explorer.exe"
+
+
+# Arch aliases
+alias pacman="sudo pacman"
+
+
+# Standard aliases
 alias ga="git add .; git status"
 alias gap="git add -p"
 alias gu="git add -u; git status"
 alias gs="git status"
 alias gg="git grep -n"
 
-alias ls="ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
+alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
 alias ll="ls -a"
 alias lc="clear; clear; ls"
@@ -35,10 +47,9 @@ alias dirs="dirs -vp"
 alias df="df -h"
 alias du="du -sh"
 
-alias ctags="ctags -R --sort=yes --fields=+iaS --extra=+q ."
+#alias ctags="ctags -R --sort=yes --fields=+iaS --extra=+q ."
 
-alias cl="clip.exe"
-alias open="explorer.exe"
+
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
 
