@@ -50,6 +50,11 @@ alias du="du -sh"
 #alias ctags="ctags -R --sort=yes --fields=+iaS --extra=+q ."
 
 
+# Functions
+help() {
+	bash -c "help $1"
+}
+
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
 
