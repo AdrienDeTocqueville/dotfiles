@@ -16,6 +16,7 @@ ln -s ~/config/elinks ~/.elinks
 # standard .config
 mkdir -p ~/.config
 ln -s ~/config/i3 ~/.config/i3
+ln -s ~/config/i3status ~/.config/i3status
 
 # X config
 ln -s ~/config/xinitrc ~/.xinitrc

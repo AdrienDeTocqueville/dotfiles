@@ -1,0 +1,44 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+order += "volume master"
+order += "wireless wlp62s0"
+order += "ethernet _first_"
+order += "battery all"
+order += "memory"
+order += "tztime local"
+
+volume master {
+	format = "%volume  "
+	format_muted = " "
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+wireless wlp62s0 {
+	format_up = "%quality  %essid %ip"
+	format_down = "W: down"
+}
+
+ethernet _first_ {
+	format_up = "%ip (%speed)"
+	format_down = ""
+}
+
+battery all {
+	format = "%status %percentage %remaining"
+}
+
+tztime local {
+	format = "%d %b %Y   %H:%M:%S"
+}
+
+memory {
+	format = "%used"
+	threshold_degraded = "10%"
+	format_degraded = "MEMORY: %free"
+}
