@@ -1,0 +1,4 @@
+setxkbmap fr
+xmodmap ~/.config/xorg/Xmodmap
+
+exec i3

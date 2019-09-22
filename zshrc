@@ -14,16 +14,26 @@ source $ZSH/oh-my-zsh.sh
 
 
 
-# Windows aliases
+# Windows
 alias cl="clip.exe"
 alias open="explorer.exe"
 
 
-# Arch aliases
+# Arch
 alias pacman="sudo pacman"
 
+xnvidia() {
+	mv ~/.config/xorg/xorg.conf.nvidia ~/.config/xorg/xorg.conf 
+	startx ~/.config/xorg/xinitrc.nvidia
+}
 
-# Standard aliases
+xintel() {
+	mv ~/.config/xorg/xorg.conf.intel ~/.config/xorg/xorg.conf 
+	startx ~/.config/xorg/xinitrc.intel
+}
+
+
+# Standard
 alias ga="git add .; git status"
 alias gap="git add -p"
 alias gu="git add -u; git status"

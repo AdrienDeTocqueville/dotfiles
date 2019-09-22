@@ -1,0 +1,7 @@
+setxkbmap fr
+xmodmap ~/.config/xorg/Xmodmap
+
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+exec i3
