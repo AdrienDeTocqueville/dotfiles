@@ -23,12 +23,12 @@ alias open="explorer.exe"
 alias pacman="sudo pacman"
 
 xnvidia() {
-	mv ~/.config/xorg/xorg.conf.nvidia ~/.config/xorg/xorg.conf 
+	cp ~/.config/xorg/xorg.conf.nvidia ~/.config/xorg/xorg.conf 
 	startx ~/.config/xorg/xinitrc.nvidia
 }
 
 xintel() {
-	mv ~/.config/xorg/xorg.conf.intel ~/.config/xorg/xorg.conf 
+	cp ~/.config/xorg/xorg.conf.intel ~/.config/xorg/xorg.conf 
 	startx ~/.config/xorg/xinitrc.intel
 }
 
