@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+backlight=/sys/class/backlight/intel_backlight/brightness
+
+if [ -n "$1" ] ; then
+	echo $((`cat $backlight` $1)) > $backlight
+fi
+
+max=/sys/class/backlight/intel_backlight/max_brightness
+echo Brightness: $(cat $backlight) / $(cat $max)

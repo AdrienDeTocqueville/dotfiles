@@ -32,6 +32,17 @@ xintel() {
 	startx ~/.config/xorg/xinitrc.intel
 }
 
+sensitivity() {
+	line=`xinput list | grep -n Mouse | head -1 | cut -d : -f 1`
+	id=`xinput list --id-only | sed -n ${line}p`
+	prop=`xinput list-props $id | grep Matrix | cut -d \( -f 2 | cut -d \) -f 1`
+
+	xinput set-prop $id $prop \
+		$1, 0.000000, 0.000000,\
+		0.000000, $1, 0.000000,\
+		0.000000, 0.000000, 1.000000
+}
+
 
 # Standard
 alias ga="git add .; git status"
