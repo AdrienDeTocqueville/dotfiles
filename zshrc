@@ -21,30 +21,19 @@ alias open="explorer.exe"
 
 # Arch
 alias pacman="sudo pacman"
+alias pdf="apvlv"
 
-xnvidia() {
-	cp ~/.config/xorg/xorg.conf.nvidia ~/.config/xorg/xorg.conf 
-	startx ~/.config/xorg/xinitrc.nvidia
-}
-
-xintel() {
-	cp ~/.config/xorg/xorg.conf.intel ~/.config/xorg/xorg.conf 
-	startx ~/.config/xorg/xinitrc.intel
-}
-
-sensitivity() {
-	line=`xinput list | grep -n Mouse | head -1 | cut -d : -f 1`
-	id=`xinput list --id-only | sed -n ${line}p`
-	prop=`xinput list-props $id | grep Matrix | cut -d \( -f 2 | cut -d \) -f 1`
-
-	xinput set-prop $id $prop \
-		$1, 0.000000, 0.000000,\
-		0.000000, $1, 0.000000,\
-		0.000000, 0.000000, 1.000000
+x() {
+	if [ -z "$driver" ] ; then
+		driver="intel"
+	fi
+	cp ~/.config/xorg/xorg.conf.$driver ~/.config/xorg/xorg.conf
+	startx ~/.config/xorg/xinitrc
 }
 
 
 # Standard
+alias dl="cd $HOME/downloads"
 alias ga="git add .; git status"
 alias gap="git add -p"
 alias gu="git add -u; git status"
@@ -56,6 +45,7 @@ alias l="ls"
 alias ll="ls -a"
 alias lc="clear; clear; ls"
 alias dir="dir --color"
+alias cp="cp -i"
 
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
@@ -74,6 +64,13 @@ alias du="du -sh"
 # Functions
 help() {
 	bash -c "help $1"
+}
+
+nstr() {
+	num=$1
+	str=$2
+	v=$(printf "%-${num}s" "$str")
+	echo "${v// /$str}"
 }
 
 

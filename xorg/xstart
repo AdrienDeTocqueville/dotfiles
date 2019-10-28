@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+if [ "$driver" = "nvidia" ] ; then
+	xrandr --setprovideroutputsource modesetting NVIDIA-0
+	xrandr --auto
+fi
+
+if [ "$driver" = "intel" ] ; then
+fi

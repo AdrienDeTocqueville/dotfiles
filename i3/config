@@ -160,6 +160,13 @@ bindsym $mod+m focus floating; mode "moveit"
 
 ### Custom settings ###
 
+# bindings
+bindsym $mod+Shift+x exec betterlockscreen --lock
+bindsym XF86AudioRaiseVolume exec amixer -q set PCM 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set PCM 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set PCM toggle
+
+
 focus_follows_mouse no
 
 assign [class="Opera"] $ws1
@@ -168,25 +175,18 @@ assign [class="Rhythmbox"] $ws0
 assign [class="Discord"] $ws0
 assign [class="Steam"] $ws9
 
-# auto exec
+# browser
 exec opera
-exec --no-startup-id amixer set PCM 103 # set volume
-exec --no-startup-id source ~/.fehbg # set wallpaper
-
+# wallpaper
+exec --no-startup-id source ~/.fehbg
 # polybar
 exec_always --no-startup-id polybar status &
-
-# bindings
-bindsym $mod+Shift+x exec betterlockscreen --lock
-bindsym XF86AudioRaiseVolume exec amixer -q set PCM 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set PCM 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set PCM toggle
 
 # remove titlebar
 for_window [class="^.*"] border pixel 5
 #for_window [class="the_game"] floating enable
 
-# set colors
+# colors
 set $bg-color            #000000
 set $inactive-bg-color   #000000
 set $text-color          #f3f4f5
