@@ -1,0 +1,12 @@
+#!/bin/zsh
+ 
+echo " === New boot === " >> /home/otarie/xlog
+sensitivity 0.3 >> /home/otarie/xlog
+echo "amixer" >> /home/otarie/xlog
+amixer >> /home/otarie/xlog
+echo "amixer get" >> /home/otarie/xlog
+amixer get PCM >> /home/otarie/xlog
+echo "amixer set" >> /home/otarie/xlog
+amixer set PCM 103 >> /home/otarie/xlog
+echo "amixer get 2" >> /home/otarie/xlog
+amixer get PCM >> /home/otarie/xlog

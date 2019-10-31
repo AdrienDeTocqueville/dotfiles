@@ -3,10 +3,10 @@ xmodmap ~/.config/xorg/Xmodmap
 
 ~/.config/xorg/xstart
 
+
 exec i3 &
 x=$!
 
-sensitivity 0.3
-amixer set PCM 103
+~/.config/xorg/xsetup
 
 wait $x
