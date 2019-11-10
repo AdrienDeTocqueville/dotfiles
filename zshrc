@@ -22,6 +22,7 @@ alias open="explorer.exe"
 # Arch
 alias pacman="sudo pacman"
 alias pdf="apvlv"
+alias dos2unix="perl -pi -e 's/\r\n/\n/g'"
 
 x() {
 	if [ -z "$driver" ] ; then

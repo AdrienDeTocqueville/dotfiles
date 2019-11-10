@@ -47,3 +47,10 @@ Extensions:
  * Privacy Badger
  * uBlock Origin
  * Vimium
+
+### Vimium
+Excluded:
+`https?://www.youtube.com/watch*` - `fjklm`
+
+Custom mappings:
+`map <c-d> scrollPageDown`

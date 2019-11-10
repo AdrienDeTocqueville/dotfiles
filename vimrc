@@ -34,12 +34,16 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
 
+nnoremap j gj
 nnoremap k gk
 
+nmap <F1> :noh<CR>
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F4> :exec("tag ".expand("<cword>"))<CR>
-nmap <F11> :mksession! .vimsession<CR> \| :qa<CR>
+nmap <F9> :wa <bar> :make -j4 <CR> : <CR>
+nmap <F10> :mksession! .vimsession<CR>
+nmap <F11> :call SwapHS()<CR>
 
 ab #i #include
 ab #n #ifndef
@@ -62,3 +66,21 @@ autocmd BufNewFile,BufRead *.frag set syntax=cs
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 call plug#end()
+
+
+function! SwapHS()
+	if expand("%:e") == 'cpp'
+		let l:new_ext = 'h'
+	elseif expand("%:e") == 'c'
+		let l:new_ext = 'h'
+	elseif expand("%:e") == 'h'
+		let l:new_ext = 'c*'
+	elseif expand("%:e") == 'frag'
+		let l:new_ext = 'vert'
+	elseif expand("%:e") == 'vert'
+		let l:new_ext = 'frag'
+	endif
+
+	let l:next_file = substitute(expand("%:."), expand("%:e")."$", l:new_ext, "")
+	exec "e " l:next_file
+endfun

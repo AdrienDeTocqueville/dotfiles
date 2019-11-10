@@ -1,13 +1,16 @@
 #!/bin/zsh
 
-line=`xinput list | grep -n Mouse | head -1 | cut -d : -f 1`
+dev="Mouse"
+if [ -n "$2" ] ; then
+	dev=$1
+	shift
+fi
+
+line=`xinput list | grep -n $dev | head -1 | cut -d : -f 1`
 
 if [ -n "$line" ] ; then
 	id=`xinput list --id-only | sed -n ${line}p`
-	prop=`xinput list-props $id | grep Matrix | cut -d \( -f 2 | cut -d \) -f 1`
+	prop=338 # Accek speed
 
-	xinput set-prop $id $prop \
-		       $1, 0.000000, 0.000000,\
-		       0.000000, $1, 0.000000,\
-		       0.000000, 0.000000, 1.000000
+	xinput set-prop $id $prop $1
 fi
