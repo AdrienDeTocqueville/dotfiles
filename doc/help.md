@@ -3,6 +3,11 @@
 ## i3
 `xprop | grep Class` : Second string
 
+## Screen capture
+
+```deepin-screenshot```
+```byzanz out.gif```
+
 ## CMake
 ```bash
 mkdir bin
@@ -17,3 +22,4 @@ systemctl stop wpa_supplicant@wlp62s0.service
 wpa_supplicant -B -i wlp62s0 -c /etc/wpa_supplicant/wpa_supplicant_eduroam.conf
 dhcpcd
 ```
+Then wait a bit

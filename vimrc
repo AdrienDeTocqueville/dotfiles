@@ -37,10 +37,13 @@ nnoremap <Right> :vertical resize -2<CR>
 nnoremap j gj
 nnoremap k gk
 
+nmap <C-t> :tabe %<CR>
+
 nmap <F1> :noh<CR>
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F4> :exec("tag ".expand("<cword>"))<CR>
+nmap <F8> :wa <bar> :make debug -j4 <CR> : <CR>
 nmap <F9> :wa <bar> :make -j4 <CR> : <CR>
 nmap <F10> :mksession! .vimsession<CR>
 nmap <F11> :call SwapHS()<CR>
