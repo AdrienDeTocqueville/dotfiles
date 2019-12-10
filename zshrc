@@ -47,13 +47,14 @@ alias ll="ls -a"
 alias lc="clear; clear; ls"
 alias dir="dir --color"
 alias cp="cp -i"
+alias mv="mv -i"
 
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
 
 alias vim="vim -O"
 alias vi="vim -S .vimsession"
-alias make="make -j4"
+alias make="make -j$(nproc)"
 alias gdb="gdb -q"
 alias dirs="dirs -vp"
 alias df="df -h"
@@ -72,6 +73,10 @@ nstr() {
 	str=$2
 	v=$(printf "%-${num}s" "$str")
 	echo "${v// /$str}"
+}
+
+hex() {
+	echo $((16#$1))
 }
 
 

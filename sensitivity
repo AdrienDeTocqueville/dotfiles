@@ -6,11 +6,12 @@ if [ -n "$2" ] ; then
 	shift
 fi
 
-line=`xinput list | grep -n $dev | head -1 | cut -d : -f 1`
+# I like sed
+id=`xinput list | sed -e '/Gaming Mouse/ !d' -e 's/.*id=\([0-9]*\).*/\1/' | head -1`
 
-if [ -n "$line" ] ; then
-	id=`xinput list --id-only | sed -n ${line}p`
-	prop=338 # Accek speed
+if [ -n "$id" ] ; then
+	# I really do
+	prop=`xinput list-props $id | sed -e '/Accel Speed/ !d' -e 's/.*(\(.*\)).*/\1/' | head -1`
 
 	xinput set-prop $id $prop $1
 fi

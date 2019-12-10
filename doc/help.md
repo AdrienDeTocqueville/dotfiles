@@ -1,5 +1,22 @@
 # Useful commands
 
+# pacman
+
+Delete unused packages
+```
+pacman -R `pacman -Qdtq`
+```
+
+Update packages
+```
+pacman -Syu
+```
+
+Check if package is installed
+```
+pacman -Qi <pkg>
+```
+
 ## i3
 `xprop | grep Class` : Second string
 
