@@ -1,3 +1,16 @@
+call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot'
+Plug 'beyondmarc/hlsl.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf'
+Plug 'jdsimcoe/abstract.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+syntax on
+colorscheme abstract
+
+
 set tabstop=4
 set expandtab
 set norelativenumber
@@ -23,9 +36,6 @@ set scrolloff=5
 set backspace=indent,eol,start
 
 filetype plugin on
-
-syntax on
-colorscheme elflord
 
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
@@ -62,14 +72,6 @@ augroup BgHighlight
 	autocmd WinEnter * set cul
 	autocmd WinLeave * set nocul
 augroup END
-
-
-
-call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-call plug#end()
 
 
 function! SwapHS()

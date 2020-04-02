@@ -5,8 +5,6 @@
 
 # standard config
 ln -s ~/dotfiles/zshrc ~/.zshrc
-ln -s ~/dotfiles/vimrc ~/.vimrc
-ln -s ~/dotfiles/vim/ ~/.vim
 ln -s ~/dotfiles/gdbinit ~/.gdbinit
 ln -s ~/dotfiles/screenrc ~/.screenrc
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
@@ -15,6 +13,7 @@ ln -s ~/dotfiles/elinks ~/.elinks
 
 # standard .config
 mkdir -p ~/.config
-ln -s ~/dotfiles/i3 ~/.config/i3
-ln -s ~/dotfiles/polybar ~/.config/polybar
-ln -s ~/dotfiles/xorg ~/.config/xorg
+ln -s ~/dotfiles/config/i3	~/.config/i3
+ln -s ~/dotfiles/config/polybar	~/.config/polybar
+ln -s ~/dotfiles/config/xorg	~/.config/xorg
+ln -s ~/dotfiles/config/nvim	~/.config/nvim

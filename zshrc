@@ -23,6 +23,7 @@ alias open="explorer.exe"
 alias pacman="sudo pacman"
 alias pdf="apvlv"
 alias dos2unix="perl -pi -e 's/\r\n/\n/g'"
+alias dl="cd $HOME/downloads"
 
 x() {
 	if [ -z "$driver" ] ; then
@@ -34,12 +35,16 @@ x() {
 
 
 # Standard
-alias dl="cd $HOME/downloads"
+stty -ixon # disable ctrl-s / ctrl-q
+
 alias ga="git add .; git status"
 alias gap="git add -p"
 alias gu="git add -u; git status"
 alias gs="git status"
 alias gg="git grep -n"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gc="git checkout"
 
 alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
