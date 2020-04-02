@@ -9,8 +9,8 @@
 [core]
 	autocrlf = false
 	eol = lf
+	editor = vim
 [credential]
 	helper = store
-	editor = vim
 [merge]
 	tool = vimdiff

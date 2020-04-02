@@ -1,3 +1,7 @@
+set tabstop=4
+set expandtab
+set norelativenumber
+
 set ai
 set si
 set hls
@@ -21,7 +25,7 @@ set backspace=indent,eol,start
 filetype plugin on
 
 syntax on
-silent! colorscheme abstract
+colorscheme elflord
 
 hi clear CursorLine
 hi CursorLineNR ctermfg=Red cterm=bold
@@ -38,6 +42,7 @@ nnoremap j gj
 nnoremap k gk
 
 nmap <C-t> :tabe %<CR>
+nmap <C-f> :FZF -e<CR>
 
 nmap <F1> :noh<CR>
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -59,15 +64,11 @@ augroup BgHighlight
 augroup END
 
 
-autocmd FileType python setlocal tabstop=4 expandtab
-autocmd BufNewFile,BufRead *.vert set syntax=cs
-autocmd BufNewFile,BufRead *.tesc set syntax=cs
-autocmd BufNewFile,BufRead *.tese set syntax=cs
-autocmd BufNewFile,BufRead *.frag set syntax=cs
-
 
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 
 
@@ -87,3 +88,16 @@ function! SwapHS()
 	let l:next_file = substitute(expand("%:."), expand("%:e")."$", l:new_ext, "")
 	exec "e " l:next_file
 endfun
+
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    let closed = 0
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        if getbufvar(buf, '&mod') == 0
+            silent execute 'bwipeout' buf
+            let closed += 1
+        endif
+    endfor
+    echo "Closed ".closed." hidden buffers"
+endfunction

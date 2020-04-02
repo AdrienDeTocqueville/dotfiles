@@ -31,7 +31,7 @@ hi StatusLineNC ctermfg=231 ctermbg=236 cterm=NONE guifg=#f8f8f2 guibg=#64666d g
 hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#2E2F31 gui=NONE
 hi IncSearch ctermfg=236 ctermbg=229 cterm=NONE guifg=#2E2F31 guibg=#FEF29E gui=NONE
-hi Search ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
+hi Search ctermfg=0 ctermbg=87 cterm=underline guifg=NONE guibg=NONE gui=underline
 hi Directory ctermfg=62 ctermbg=NONE cterm=NONE guifg=#5A5AE6 guibg=NONE gui=NONE
 hi Folded ctermfg=33 ctermbg=235 cterm=NONE guifg=#007AFF guibg=#2E2F31 gui=NONE
 hi SignColumn ctermfg=246 ctermbg=235 cterm=NONE guifg=#909194 guibg=#2E2F31 gui=NONE
