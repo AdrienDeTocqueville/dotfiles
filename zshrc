@@ -5,12 +5,11 @@ ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 
-plugins=(
-  git
-)
-
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# disable zsh git completion
+compdef -d git checkout
 
 
 
@@ -37,14 +36,16 @@ x() {
 # Standard
 stty -ixon # disable ctrl-s / ctrl-q
 
-alias ga="git add .; git status"
+alias ga="git add .; git status ."
+alias gu="git add -u; git status ." # doesn't add newly created files
 alias gap="git add -p"
-alias gu="git add -u; git status"
-alias gs="git status"
+alias gs="git status ."
 alias gg="git grep -n"
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gc="git checkout"
+alias gl="git pull"
+alias gp="git push"
 
 alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"

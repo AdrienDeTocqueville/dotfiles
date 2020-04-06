@@ -1,19 +1,22 @@
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf'
 Plug 'jdsimcoe/abstract.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Git
+Plug 'tpope/vim-fugitive'
+" Search
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+" Tags
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+" Tmux
+" Plug 'wellle/tmux-complete.vim'
+" Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 syntax on
 colorscheme abstract
-
-
-set tabstop=4
-set expandtab
-set norelativenumber
 
 set ai
 set si
@@ -34,6 +37,7 @@ set shiftwidth=0
 set laststatus=2
 set scrolloff=5
 set backspace=indent,eol,start
+set norelativenumber
 
 filetype plugin on
 
@@ -43,6 +47,8 @@ hi CursorLine ctermbg=236 cterm=NONE
 
 map K <Nop>
 
+tnoremap <Esc> <C-\><C-n>
+
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
@@ -51,17 +57,27 @@ nnoremap <Right> :vertical resize -2<CR>
 nnoremap j gj
 nnoremap k gk
 
-nmap <C-t> :tabe %<CR>
-nmap <C-f> :FZF -e<CR>
+nnoremap <C-t> :tabe %<CR>
+nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'left': '40%', 'options': '-e'})<CR>
+nnoremap <C-g> :Ag 
+vnoremap <C-g> y:Ag <C-r>"<CR>
 
-nmap <F1> :noh<CR>
-nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-nmap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
-nmap <F4> :exec("tag ".expand("<cword>"))<CR>
-nmap <F8> :wa <bar> :make debug -j4 <CR> : <CR>
-nmap <F9> :wa <bar> :make -j4 <CR> : <CR>
-nmap <F10> :mksession! .vimsession<CR>
-nmap <F11> :call SwapHS()<CR>
+" Tags
+nnoremap <F1> :TagbarToggle<CR>
+nnoremap <F2> :exec("tag ".expand("<cword>"))<CR>
+nnoremap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Debugger (todo)
+nnoremap <F7> :wa <bar> :make -j4 <CR> : <CR>
+
+" Misc
+nnoremap <F10> :mksession! .vimsession<CR>
+nnoremap <F11> :call SwapHS()<CR>
+nnoremap <F12> :noh<CR>
+
+" gutentags
+let gutentags_ctags_exclude=['*.meta', '*.md']
 
 ab #i #include
 ab #n #ifndef
@@ -103,3 +119,9 @@ function! DeleteHiddenBuffers()
     endfor
     echo "Closed ".closed." hidden buffers"
 endfunction
+
+
+" SRP
+autocmd BufNewFile,BufRead /mnt/d/Unity/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead *.shader set syntax=hlsl
+let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']
