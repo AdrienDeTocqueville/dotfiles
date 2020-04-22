@@ -1,3 +1,19 @@
+# Windows
+
+## wsl
+
+Put some aliases in `~/.extrc`
+```bash
+alias srp="cd /mnt/c/Users/Adrien/source/repos/Graphics/com.unity.render-pipelines.high-definition"
+alias ecs="cd /mnt/d/Programs/C++/ECS"
+srp
+```
+
+### nvim
+
+Download a [binary release](https://github.com/neovim/neovim/releases/)
+Install [win32yank](https://github.com/equalsraf/win32yank/releases) for clipboard support
+
 # Arch
 
 ## General purpose packages

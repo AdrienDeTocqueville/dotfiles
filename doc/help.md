@@ -18,12 +18,16 @@ pacman -Qi <pkg>
 ```
 
 ## i3
-`xprop | grep Class` : Second string
+```
+xprop | grep Class # Use the second string
+```
 
 ## Screen capture
 
-```deepin-screenshot```
-```byzanz out.gif```
+```
+deepin-screenshot
+byzanz out.gif
+```
 
 ## CMake
 ```bash

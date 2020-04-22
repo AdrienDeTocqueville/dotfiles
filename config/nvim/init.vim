@@ -1,4 +1,7 @@
 call plug#begin('~/.vim/plugged')
+Plug 'tomasiser/vim-code-dark'
+Plug 'pgavlin/pulumi.vim'
+
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
 Plug 'jdsimcoe/abstract.vim'
@@ -16,7 +19,7 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 syntax on
-colorscheme abstract
+colorscheme codedark
 
 set ai
 set si
@@ -25,6 +28,7 @@ set nocp
 set ruler
 set number
 set hidden
+set autoread
 set wildmenu
 set wildmode=longest,full
 set wildignore=*.o,*~,*.pyc
@@ -38,6 +42,8 @@ set laststatus=2
 set scrolloff=5
 set backspace=indent,eol,start
 set norelativenumber
+
+au FocusGained * :checktime
 
 filetype plugin on
 
@@ -58,21 +64,21 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap <C-t> :tabe %<CR>
-nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'left': '40%', 'options': '-e'})<CR>
+nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 nnoremap <C-g> :Ag 
 vnoremap <C-g> y:Ag <C-r>"<CR>
 
 " Tags
 nnoremap <F1> :TagbarToggle<CR>
 nnoremap <F2> :exec("tag ".expand("<cword>"))<CR>
-nnoremap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <F3> :sp<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Debugger (todo)
 nnoremap <F7> :wa <bar> :make -j4 <CR> : <CR>
 
 " Misc
-nnoremap <F10> :mksession! .vimsession<CR>
+nnoremap <F10> :call DeleteHiddenBuffers()<CR>:mksession! .vimsession<CR>
 nnoremap <F11> :call SwapHS()<CR>
 nnoremap <F12> :noh<CR>
 
@@ -94,6 +100,8 @@ function! SwapHS()
 	if expand("%:e") == 'cpp'
 		let l:new_ext = 'h'
 	elseif expand("%:e") == 'c'
+		let l:new_ext = 'h'
+	elseif expand("%:e") == 'inl'
 		let l:new_ext = 'h'
 	elseif expand("%:e") == 'h'
 		let l:new_ext = 'c*'
@@ -122,6 +130,6 @@ endfunction
 
 
 " SRP
-autocmd BufNewFile,BufRead /mnt/d/Unity/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead /mnt/c/Users/Adrien/source/repos/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead *.shader set syntax=hlsl
 let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']
