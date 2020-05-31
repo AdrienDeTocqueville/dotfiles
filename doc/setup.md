@@ -29,6 +29,18 @@ AUR:
  * polybar
  * apvlv (pdf)
 
+## Wallpaper
+
+```bash
+pacman -S feh
+```
+
+In `~/.fehbg`:
+```bash
+#!/bin/sh
+feh --no-fehbg --bg-scale '/home/otarie/Pictures/wallpaper.png'
+```
+
 ## Bluetooth
 
 ### Install

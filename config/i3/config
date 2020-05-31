@@ -185,7 +185,7 @@ exec_always --no-startup-id polybar status &
 # remove titlebar
 for_window [class="^.*"] border pixel 5
 #for_window [class="the_game"] floating enable
-for_window [class="MinGE test suite"] floating enable
+for_window [class="MinGE"] floating enable
 
 # colors
 set $bg-color            #000000

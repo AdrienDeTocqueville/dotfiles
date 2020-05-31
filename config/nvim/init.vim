@@ -21,6 +21,9 @@ call plug#end()
 syntax on
 colorscheme codedark
 
+set clipboard=unnamed
+set mouse=a
+
 set ai
 set si
 set hls
