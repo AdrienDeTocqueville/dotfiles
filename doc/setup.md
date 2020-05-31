@@ -13,13 +13,6 @@ AUR:
  * polybar
  * apvlv (pdf)
 
-## Wifi
-
-```bash
-wpa_passphrase <ssid> <pwd> > /etc/wpa_supplicant/wpa_supplicant-wlp62s0.conf
-wpa_supplicant -B -i wlp62s0 -c /etc/wpa_supplicant/wpa_supplicant-wlp62s0.conf
-```
-
 ## Bluetooth
 
 ### Install

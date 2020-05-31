@@ -7,7 +7,7 @@ set number
 set hidden
 set wildmenu
 set wildmode=longest,full
-set wildignore=*.o,*~,*.pyc
+set wildignore=*.o,*.d,*~,*.pyc
 set showcmd
 set splitbelow
 set splitright
@@ -43,8 +43,8 @@ nmap <F1> :noh<CR>
 nmap <F2> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F3> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 nmap <F4> :exec("tag ".expand("<cword>"))<CR>
-nmap <F8> :wa <bar> :make debug -j4 <CR> : <CR>
-nmap <F9> :wa <bar> :make -j4 <CR> : <CR>
+nmap <F8> :wa <bar> :make "config=debug" -j4 <CR> : <CR>
+nmap <F9> :wa <bar> :make config=dev -j4 <CR> : <CR>
 nmap <F10> :mksession! .vimsession<CR>
 nmap <F11> :call SwapHS()<CR>
 

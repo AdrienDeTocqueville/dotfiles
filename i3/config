@@ -176,7 +176,7 @@ assign [class="Discord"] $ws0
 assign [class="Steam"] $ws9
 
 # browser
-exec opera
+exec qutebrowser
 # wallpaper
 exec --no-startup-id source ~/.fehbg
 # polybar
