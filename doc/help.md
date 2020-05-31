@@ -35,7 +35,9 @@ pacman -Qi <pkg>
 ```
 
 ## i3
-`xprop | grep Class` : Second string
+```
+xprop | grep Class # Use the second string
+```
 
 ## Screen capture
 

@@ -9,8 +9,9 @@
 [core]
 	autocrlf = false
 	eol = lf
+	editor = vim
+	excludesfile = ~/.gitignore
 [credential]
 	helper = store
-	editor = vim
 [merge]
 	tool = vimdiff
