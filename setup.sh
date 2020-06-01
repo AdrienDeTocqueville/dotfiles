@@ -18,3 +18,4 @@ ln -s ~/dotfiles/config/i3	~/.config/i3
 ln -s ~/dotfiles/config/polybar	~/.config/polybar
 ln -s ~/dotfiles/config/xorg	~/.config/xorg
 ln -s ~/dotfiles/config/nvim	~/.config/nvim
+ln -s ~/dotfiles/config/nvim/init.vim ~/.vimrc
