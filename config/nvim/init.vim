@@ -69,7 +69,7 @@ nnoremap k gk
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 nnoremap <C-g> :Ag 
-vnoremap <C-g> y:Ag <C-r>"<CR>
+vnoremap <C-g> "ay:let cmd="Ag " . @a <bar> call histadd("cmd", cmd) <bar> execute cmd<CR>
 
 " Tags
 nnoremap <F1> :TagbarToggle<CR>
