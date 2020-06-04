@@ -136,6 +136,6 @@ endfunction
 
 
 " SRP
-autocmd BufNewFile,BufRead /mnt/c/Users/Adrien/source/repos/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead *.shader set syntax=hlsl
 let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']
