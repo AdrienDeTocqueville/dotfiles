@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tomasiser/vim-code-dark'
-Plug 'pgavlin/pulumi.vim'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
@@ -20,6 +19,9 @@ call plug#end()
 
 syntax on
 colorscheme codedark
+hi StatusLine ctermbg=93
+hi StatusLineNC ctermbg=27
+hi Comment ctermfg=28
 
 set clipboard=unnamed
 set mouse=a
