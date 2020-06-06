@@ -13,11 +13,6 @@ compdef -d git checkout
 
 
 
-# Windows
-alias cl="clip.exe"
-alias open="explorer.exe"
-
-
 # Arch
 alias pacman="sudo pacman"
 alias pdf="apvlv"
@@ -58,7 +53,6 @@ alias mv="mv -i"
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
 
-alias vim="vim -O"
 alias make="make -j$(nproc)"
 alias gdb="gdb -q"
 alias dirs="dirs -vp"

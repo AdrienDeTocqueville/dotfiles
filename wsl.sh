@@ -28,9 +28,10 @@ rm -rf ~/win32yank
 ~/dotfiles/setup.sh
 
 # WSL specific aliases
-echo 'alias vim=~/nvim/usr/bin/nvim'		>> ~/.extrc
+echo 'vim() { ~/nvim/usr/bin/nvim -O $* }'	>> ~/.extrc
 echo 'alias dl="/mnt/d/Downloads/"'		>> ~/.extrc
 echo 'alias prgm="/mnt/d/Programs/"'		>> ~/.extrc
+echo 'alias open="explorer.exe"'		>> ~/.extrc
 echo 'export PATH="$PATH:/mnt/d/Softwares"'	>> ~/.extrc
 
 exec zsh
