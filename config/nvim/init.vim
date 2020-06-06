@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tomasiser/vim-code-dark'
-Plug 'pgavlin/pulumi.vim'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
@@ -20,6 +19,9 @@ call plug#end()
 
 syntax on
 colorscheme codedark
+hi StatusLine ctermbg=93
+hi StatusLineNC ctermbg=27
+hi Comment ctermfg=28
 
 set clipboard=unnamed
 set mouse=a
@@ -137,6 +139,6 @@ endfunction
 
 
 " SRP
-autocmd BufNewFile,BufRead /mnt/c/Users/Adrien/source/repos/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead *.shader set syntax=hlsl
 let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']

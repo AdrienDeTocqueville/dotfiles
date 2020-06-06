@@ -1,3 +1,5 @@
+sudo apt update
+sudo apt upgrade -y
 sudo apt install curl git zsh ctags unzip
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
 
