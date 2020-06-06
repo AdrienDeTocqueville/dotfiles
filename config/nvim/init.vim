@@ -81,7 +81,9 @@ nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <F5> :checktime<CR>
 
 " Debugger (todo)
-nnoremap <F7> :wa <bar> :make -j4 <CR> : <CR>
+nnoremap <F6> :wa <bar> :make -j8 graphics_tests config=debug <CR> : <CR>
+nnoremap <F7> :wa <bar> :make -j8 graphics_tests config=dev <CR> : <CR>
+nnoremap <F8> :wa <bar> :make -j8 graphics_tests config=release <CR> : <CR>
 
 " Misc
 nnoremap <F10> :call DeleteHiddenBuffers()<CR>:mksession! .vim.
@@ -103,22 +105,21 @@ augroup END
 
 
 function! SwapHS()
-	if expand("%:e") == 'cpp'
-		let l:new_ext = 'h'
-	elseif expand("%:e") == 'c'
-		let l:new_ext = 'h'
-	elseif expand("%:e") == 'inl'
-		let l:new_ext = 'h'
-	elseif expand("%:e") == 'h'
-		let l:new_ext = 'c*'
-	elseif expand("%:e") == 'frag'
-		let l:new_ext = 'vert'
-	elseif expand("%:e") == 'vert'
-		let l:new_ext = 'frag'
-	endif
-
-	let l:next_file = substitute(expand("%:."), expand("%:e")."$", l:new_ext, "")
-	exec "e " l:next_file
+	let next_exts = { }
+	let next_exts['cpp'] = ['inl', 'hpp', 'h']
+	let next_exts['c'] = ['h']
+	let next_exts['inl'] = ['h']
+	let next_exts['h'] = ['cpp', 'c']
+	let next_exts['frag'] = ['vert']
+	let next_exts['vert'] = ['frag']
+	for next_ext in get(next_exts, expand("%:e"), [])
+		let l:next_file = substitute(expand("%:."), expand("%:e")."$", next_ext, "")
+		if filereadable(l:next_file)
+			exec "e " l:next_file
+			return
+		endif
+	endfor
+	echo "No file to swap to"
 endfun
 
 function! DeleteHiddenBuffers()
