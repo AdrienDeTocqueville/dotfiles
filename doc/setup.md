@@ -1,20 +1,22 @@
 # Windows
 
-## wsl
-
-Put some aliases in `~/.extrc`
-```bash
-alias srp="cd /mnt/c/Users/Adrien/source/repos/Graphics/com.unity.render-pipelines.high-definition"
-alias ecs="cd /mnt/d/Programs/C++/ECS"
-srp
-```
-
-### nvim
-
-Download a [binary release](https://github.com/neovim/neovim/releases/)
-Install [win32yank](https://github.com/equalsraf/win32yank/releases) for clipboard support
+Exec `wsl.sh`
 
 # Arch
+
+## extr
+
+```bach
+vim() { nvim -O $* }
+alias df="df -h | grep -e sda6 -e Used"
+alias dl="cd $HOME/downloads"
+alias prgm="cd $HOME/repos"
+alias pacman="sudo pacman"
+alias pdf="apvlv"
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export PATH=$PATH:$HOME/bin
+```
 
 ## General purpose packages
 
@@ -38,7 +40,7 @@ pacman -S feh
 In `~/.fehbg`:
 ```bash
 #!/bin/sh
-feh --no-fehbg --bg-scale '/home/otarie/Pictures/wallpaper.png'
+feh --no-fehbg --bg-scale '$HOME/Pictures/wallpaper.png'
 ```
 
 ## Bluetooth

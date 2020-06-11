@@ -13,12 +13,6 @@ compdef -d git checkout
 
 
 
-# Arch
-alias pacman="sudo pacman"
-alias pdf="apvlv"
-alias dos2unix="perl -pi -e 's/\r\n/\n/g'"
-alias dl="cd $HOME/downloads"
-
 x() {
 	if [ -z "$driver" ] ; then
 		driver="intel"
@@ -31,6 +25,9 @@ x() {
 # Standard
 stty -ixon # disable ctrl-s / ctrl-q
 
+alias dos2unix="perl -pi -e 's/\r\n/\n/g'"
+
+alias gcl="git clone"
 alias ga="git add .; git status ."
 alias gu="git add -u; git status ." # doesn't add newly created files
 alias gap="git add -p"
