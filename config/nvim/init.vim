@@ -21,6 +21,8 @@ syntax on
 colorscheme codedark
 hi StatusLine ctermbg=93
 hi StatusLineNC ctermbg=27
+hi TabLine ctermbg=234 ctermfg=7
+hi TabLineSel ctermbg=27 ctermfg=7
 hi Comment ctermfg=28
 
 set clipboard=unnamed

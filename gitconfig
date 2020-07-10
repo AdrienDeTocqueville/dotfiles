@@ -9,7 +9,7 @@
 [core]
 	autocrlf = false
 	eol = lf
-	editor = vim
+	editor = ~/nvim/usr/bin/nvim
 	excludesfile = ~/.gitignore
 [credential]
 	helper = store
