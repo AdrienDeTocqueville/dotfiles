@@ -27,6 +27,9 @@ hi Comment ctermfg=28
 
 set clipboard=unnamed
 set mouse=a
+set foldmethod=syntax
+set foldlevelstart=99
+set foldlevel=99
 
 set ai
 set si
@@ -142,5 +145,6 @@ endfunction
 
 " SRP
 autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead ~/unity/Graphics/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead *.shader set syntax=hlsl
 let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']
