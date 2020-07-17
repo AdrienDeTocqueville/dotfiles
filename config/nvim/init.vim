@@ -1,3 +1,5 @@
+autocmd!
+
 call plug#begin('~/.vim/plugged')
 Plug 'tomasiser/vim-code-dark'
 
@@ -119,6 +121,7 @@ function! SwapHS()
 	let next_exts['h'] = ['cpp', 'c']
 	let next_exts['frag'] = ['vert']
 	let next_exts['vert'] = ['frag']
+	let next_exts['cs'] = ['cs.hlsl']
 	for next_ext in get(next_exts, expand("%:e"), [])
 		let l:next_file = substitute(expand("%:."), expand("%:e")."$", next_ext, "")
 		if filereadable(l:next_file)
@@ -135,7 +138,7 @@ function! DeleteHiddenBuffers()
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
         if getbufvar(buf, '&mod') == 0
-            silent execute 'bwipeout' buf
+            silent execute 'bwipeout!' buf
             let closed += 1
         endif
     endfor
@@ -147,4 +150,5 @@ endfunction
 autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead ~/unity/Graphics/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead *.shader set syntax=hlsl
-let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects']
+autocmd BufNewFile,BufRead *.compute set syntax=hlsl
+let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects', 'Samples~', 'Documentation~']
