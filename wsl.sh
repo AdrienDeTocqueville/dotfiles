@@ -26,6 +26,7 @@ rm -rf ~/win32yank
 
 # Config files
 ~/dotfiles/setup.sh
+ln -s ~/dotfiles/open_with_nvim ~/open_with_nvim
 
 # WSL specific aliases
 echo 'vim() { ~/nvim/usr/bin/nvim -O $* }'	>> ~/.extrc

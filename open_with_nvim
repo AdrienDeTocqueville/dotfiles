@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+source ~/.zshrc
+file=$(wslpath "$1")
+cd $(dirname "$file")
+vim "$file"
