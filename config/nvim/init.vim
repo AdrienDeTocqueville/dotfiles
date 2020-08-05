@@ -23,9 +23,11 @@ syntax on
 colorscheme codedark
 hi StatusLine ctermbg=93
 hi StatusLineNC ctermbg=27
-hi TabLine ctermbg=234 ctermfg=7
-hi TabLineSel ctermbg=27 ctermfg=7
+hi TabLine ctermfg=15 ctermbg=242
+hi TabLineSel cterm=underline ctermbg=0 ctermfg=7
 hi Comment ctermfg=28
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 set clipboard=unnamed
 set mouse=a
@@ -121,7 +123,7 @@ function! SwapHS()
 	let next_exts['h'] = ['cpp', 'c']
 	let next_exts['frag'] = ['vert']
 	let next_exts['vert'] = ['frag']
-	let next_exts['cs'] = ['cs.hlsl']
+	let next_exts['cs'] = ['cs.hlsl', 'hlsl']
 	for next_ext in get(next_exts, expand("%:e"), [])
 		let l:next_file = substitute(expand("%:."), expand("%:e")."$", next_ext, "")
 		if filereadable(l:next_file)
