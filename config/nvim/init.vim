@@ -90,9 +90,9 @@ nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <F5> :checktime<CR>
 
 " Debugger (todo)
-nnoremap <F6> :wa <bar> :make -j8 graphics_tests config=debug <CR> : <CR>
-nnoremap <F7> :wa <bar> :make -j8 graphics_tests config=dev <CR> : <CR>
-nnoremap <F8> :wa <bar> :make -j8 graphics_tests config=release <CR> : <CR>
+nnoremap <F6> :wa <bar> :make -j8 config=debug <CR>
+nnoremap <F7> :wa <bar> :make -j8 config=dev <CR>
+nnoremap <F8> :wa <bar> :make -j8 config=release <CR>
 
 " Misc
 nnoremap <F10> :call DeleteHiddenBuffers()<CR>:mksession! .vim.

@@ -1,3 +1,7 @@
+# Infos
+
+ Core dumps are located in `/var/lib/systemd/coredump/`
+
 # Useful commands
 
 ## Wifi
