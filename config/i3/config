@@ -183,9 +183,10 @@ exec --no-startup-id source ~/.fehbg
 exec_always --no-startup-id polybar status &
 
 # remove titlebar
-for_window [class="^.*"] border pixel 5
+default_border pixel 5
 #for_window [class="the_game"] floating enable
-for_window [title="MinGE"] floating enable
+for_window [title="MinGE"] floating enable b
+for_window [title="MinGE"] border normal
 
 # colors
 set $bg-color            #000000
