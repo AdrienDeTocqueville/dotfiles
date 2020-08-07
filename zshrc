@@ -28,6 +28,7 @@ stty -ixon # disable ctrl-s / ctrl-q
 alias dos2unix="perl -pi -e 's/\r\n/\n/g'"
 
 alias gcl="git clone"
+alias gm="git commit -m"
 alias ga="git add .; git status ."
 alias gu="git add -u; git status ." # doesn't add newly created files
 alias gap="git add -p"
@@ -35,6 +36,8 @@ alias gs="git status ."
 alias gg="git grep -n"
 alias gd="git diff"
 alias gdc="git diff --cached"
+alias grh="git reset --hard"
+alias grhh="git reset --hard HEAD"
 alias gc="git checkout"
 alias gl="git pull"
 alias gp="git push"

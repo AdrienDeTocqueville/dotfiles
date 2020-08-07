@@ -5,7 +5,7 @@ Plug 'tomasiser/vim-code-dark'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
-Plug 'jdsimcoe/abstract.vim'
+Plug 'mbbill/undotree'
 " Git
 Plug 'tpope/vim-fugitive'
 " Search
@@ -82,8 +82,9 @@ nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'
 nnoremap <C-g> :Ag 
 vnoremap <C-g> "ay:let cmd="Ag " . @a <bar> call histadd("cmd", cmd) <bar> execute cmd<CR>
 
-" Tags
-nnoremap <F1> :TagbarToggle<CR>
+" Tags (f13 = shift+f1)
+nnoremap <F1> :UndotreeToggle<CR>:UndotreeFocus<CR>
+nnoremap <F13> :TagbarToggle<CR>
 nnoremap <F2> :exec("tag ".expand("<cword>"))<CR>
 nnoremap <F3> :sp<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
