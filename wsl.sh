@@ -30,6 +30,7 @@ ln -s ~/dotfiles/open_with_nvim ~/open_with_nvim
 
 # WSL specific aliases
 echo 'vim() { ~/nvim/usr/bin/nvim -O $* }'	>> ~/.extrc
+echo 'goto() { cd $(wslpath $1) }'             >> ~/.extrc
 echo 'alias dl="/mnt/d/Downloads/"'		>> ~/.extrc
 echo 'alias prgm="/mnt/d/Programs/"'		>> ~/.extrc
 echo 'alias open="explorer.exe"'		>> ~/.extrc
