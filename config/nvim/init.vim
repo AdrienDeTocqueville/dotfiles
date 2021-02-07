@@ -152,6 +152,6 @@ endfunction
 " SRP
 autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 autocmd BufNewFile,BufRead ~/unity/Graphics/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-autocmd BufNewFile,BufRead *.shader set syntax=hlsl
-autocmd BufNewFile,BufRead *.compute set syntax=hlsl
-let gutentags_ctags_exclude+=['.yamato', '.github', 'TestProjects', 'Tools', 'LocalTestProjects', 'Samples~', 'Documentation~']
+autocmd BufNewFile,BufRead *.shader set filetype=hlsl
+autocmd BufNewFile,BufRead *.compute set filetype=hlsl
+let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs']
