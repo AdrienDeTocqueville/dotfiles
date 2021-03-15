@@ -154,7 +154,7 @@ function ExecWithHistory(cmd)
     echo a:cmd
     :call histadd("cmd", a:cmd)
     exec a:cmd
-+endfun
+endfun
 
 
 " SRP / C#
