@@ -2,6 +2,7 @@ autocmd!
 
 call plug#begin('~/.vim/plugged')
 Plug 'tomasiser/vim-code-dark'
+Plug 'mhartington/oceanic-next'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'beyondmarc/hlsl.vim'
@@ -20,7 +21,7 @@ Plug 'majutsushi/tagbar'
 call plug#end()
 
 syntax on
-colorscheme codedark
+colorscheme OceanicNext
 hi StatusLine ctermbg=93
 hi StatusLineNC ctermbg=27
 hi TabLine ctermfg=15 ctermbg=242
@@ -80,14 +81,15 @@ nnoremap k gk
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 nnoremap <C-g> :Ag 
-vnoremap <C-g> "ay:let cmd="Ag " . @a <bar> call histadd("cmd", cmd) <bar> execute cmd<CR>
+vnoremap <C-g> "ay:call ExecWithHistory("Ag " . @a)<CR>
 
 " Tags (f13 = shift+f1)
 nnoremap <F1> :UndotreeToggle<CR>:UndotreeFocus<CR>
 nnoremap <F13> :TagbarToggle<CR>
-nnoremap <F2> :exec("tag ".expand("<cword>"))<CR>
-nnoremap <F3> :sp<CR>:exec("tag ".expand("<cword>"))<CR>
-nnoremap <F4> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <F2> :call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F3> :vsp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F15> :sp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F4> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
 
 " ...
 nnoremap <F5> :checktime<CR>
@@ -148,10 +150,21 @@ function! DeleteHiddenBuffers()
     echo "Closed ".closed." hidden buffers"
 endfunction
 
+function ExecWithHistory(cmd)
+    echo a:cmd
+    :call histadd("cmd", a:cmd)
+    exec a:cmd
++endfun
 
-" SRP
-autocmd BufNewFile,BufRead /mnt/c/Users/Unity/source/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-autocmd BufNewFile,BufRead ~/unity/Graphics/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+
+" SRP / C#
+autocmd BufNewFile,BufRead /mnt/a/Unity/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead /mnt/d/Unity/Unity/**/*       set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+autocmd BufNewFile,BufRead /mnt/d/Unity/**/*             set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+" Syntax
 autocmd BufNewFile,BufRead *.shader set filetype=hlsl
 autocmd BufNewFile,BufRead *.compute set filetype=hlsl
-let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs']
+autocmd BufNewFile,BufRead *.cginc set filetype=hlsl
+autocmd BufNewFile,BufRead *.template set filetype=hlsl
+let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
+let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'Packages', 'artifacts', 'build', 'Art']
