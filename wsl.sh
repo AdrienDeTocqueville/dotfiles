@@ -6,6 +6,9 @@ else
 BINDIR="/mnt/c/Softwares"
 fi
 
+APPDATA=$(echo "$PATH" | grep -o "[^:]*WindowsApps[^:]*")
+APPDATA="$APPDATA/../.."
+
 sudo ln -s $BINDIR/Git/bin/git.exe  /bin/git
 
 sudo apt update && sudo apt upgrade -y
@@ -35,6 +38,7 @@ mv ~/win32yank/win32yank.exe "$BINDIR" && rm -rf ~/win32yank
 # Config files
 ~/dotfiles/setup.sh
 ln -s ~/dotfiles/open_with_nvim ~/open_with_nvim
+\cp settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
 
 # WSL specific aliases
 echo 'vim() { ~/nvim/usr/bin/nvim -O $* }'	>> ~/.extrc
