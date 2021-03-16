@@ -38,6 +38,8 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias grh="git reset --hard"
 alias grhh="git reset --hard HEAD"
+alias gro="git reset --hard \$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"
+
 alias gc="git checkout"
 alias gl="git pull"
 alias gp="git push"
