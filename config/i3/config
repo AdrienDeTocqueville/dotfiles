@@ -162,9 +162,9 @@ bindsym $mod+m focus floating; mode "moveit"
 
 # bindings
 bindsym $mod+Shift+x exec betterlockscreen --lock
-bindsym XF86AudioRaiseVolume exec amixer -q set PCM 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set PCM 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set PCM toggle
+bindsym XF86AudioRaiseVolume exec "amixer -q set Master 2dB+ unmute && pkill -USR1 polybar"
+bindsym XF86AudioLowerVolume exec "amixer -q set Master 2dB- unmute && pkill -USR1 polybar"
+bindsym XF86AudioMute exec amixer -q set Master toggle
 
 
 focus_follows_mouse no
@@ -185,8 +185,8 @@ exec_always --no-startup-id polybar status &
 # remove titlebar
 default_border pixel 5
 #for_window [class="the_game"] floating enable
-for_window [title="MinGE"] floating enable b
-for_window [title="MinGE"] border normal
+for_window [title="doge Editor"] floating enable b
+for_window [title="doge Editor"] border normal
 
 # colors
 set $bg-color            #000000

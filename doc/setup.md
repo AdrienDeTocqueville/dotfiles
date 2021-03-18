@@ -4,15 +4,19 @@ Exec `wsl.sh`
 
 # Arch
 
-## extr
+## extrc
 
 ```bach
 vim() { nvim -O $* }
 alias df="df -h | grep -e sda6 -e Used"
 alias dl="cd $HOME/downloads"
 alias prgm="cd $HOME/repos"
-alias pacman="sudo pacman"
 alias pdf="apvlv"
+alias wifi="nmtui-connect"
+alias pacman="sudo pacman"
+alias mount="sudo mount"
+alias mnt="sudo mnt"
+alias umount="sudo umount"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export PATH=$PATH:$HOME/bin
@@ -30,6 +34,11 @@ AUR:
  * betterlockscreen
  * polybar
  * apvlv (pdf)
+
+## WIFI
+
+ * networkmanager
+ * wpa_supplicant
 
 ## Wallpaper
 

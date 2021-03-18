@@ -6,6 +6,12 @@
 
 ## Wifi
 
+With Network Manager:
+```bash
+nmtui-connect
+```
+
+With WPA supplicant
 As root
 
 ```bash

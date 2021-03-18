@@ -17,6 +17,7 @@ Plug 'majutsushi/tagbar'
 " Tmux
 " Plug 'wellle/tmux-complete.vim'
 " Plug 'christoomey/vim-tmux-navigator'
+" LaTeX
 call plug#end()
 
 syntax on
@@ -97,6 +98,8 @@ nnoremap <F6> :wa <bar> :make -j8 config=debug <CR>
 nnoremap <F7> :wa <bar> :make -j8 config=dev <CR>
 nnoremap <F8> :wa <bar> :make -j8 config=release <CR>
 
+"nnoremap <F6> :wa <bar> :!pdflatex expand("%:r")<CR>:!pdf expand("%:r") . ".pdf"<CR>
+
 " Misc
 nnoremap <F10> :call DeleteHiddenBuffers()<CR>:mksession! .vim.
 nnoremap <F11> :call SwapHS()<CR>
@@ -120,8 +123,8 @@ function! SwapHS()
 	let next_exts = { }
 	let next_exts['cpp'] = ['inl', 'hpp', 'h']
 	let next_exts['c'] = ['h']
-	let next_exts['inl'] = ['h']
-	let next_exts['h'] = ['cpp', 'c']
+	let next_exts['inl'] = ['h', 'cpp', 'c']
+	let next_exts['h'] = ['cpp', 'c', 'inl']
 	let next_exts['frag'] = ['vert']
 	let next_exts['vert'] = ['frag']
 	let next_exts['cs'] = ['cs.hlsl', 'hlsl']

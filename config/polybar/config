@@ -55,5 +55,5 @@ interval = 5
 
 [module/volume]
 type = custom/script
-exec = amixer get PCM | grep Left: | awk '{print "vol: "$5" | "}'
+exec = amixer get Master | grep Mono: | awk '{print "vol: "$4" | "}'
 interval = 10
