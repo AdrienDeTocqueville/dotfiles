@@ -178,9 +178,9 @@ assign [class="Steam"] $ws9
 # browser
 exec qutebrowser
 # wallpaper
-exec --no-startup-id source ~/.fehbg
+exec --no-startup-id source ~/.config/i3/fehbg
 # polybar
-exec_always --no-startup-id polybar status &
+exec_always --no-startup-id source ~/.config/polybar/launch
 
 # remove titlebar
 default_border pixel 5

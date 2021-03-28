@@ -1,3 +1,10 @@
 #!/bin/zsh
  
 sensitivity -1.0
+
+PRIMARY=$(xrandr --query | grep " primary" | cut -d" " -f1)
+MONITORS=$(xrandr --query | grep " connected" | grep -v " primary" | cut -d" " -f1)
+
+for m in $MONITORS; do
+    xrandr --output $m --auto --right-of $PRIMARY
+done

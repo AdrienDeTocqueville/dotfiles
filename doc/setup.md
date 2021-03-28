@@ -4,23 +4,9 @@ Exec `wsl.sh`
 
 # Arch
 
-## extrc
+Exec `arch.sh`
 
-```bach
-vim() { nvim -O $* }
-alias df="df -h | grep -e sda6 -e Used"
-alias dl="cd $HOME/downloads"
-alias prgm="cd $HOME/repos"
-alias pdf="apvlv"
-alias wifi="nmtui-connect"
-alias pacman="sudo pacman"
-alias mount="sudo mount"
-alias mnt="sudo mnt"
-alias umount="sudo umount"
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PATH=$PATH:$HOME/bin
-```
+Note: Core dumps are located in `/var/lib/systemd/coredump/`
 
 ## General purpose packages
 
@@ -29,27 +15,60 @@ Pacman:
  * yay
  * xorg-xinput xorg-xprop xorg-xev
  * alsa-utils alsa-oss
+ * feh (for wallpaper)
 
 AUR:
  * betterlockscreen
  * polybar
  * apvlv (pdf)
 
-## WIFI
-
+WiFi:
+ * nmtui
  * networkmanager
  * wpa_supplicant
 
-## Wallpaper
+## pacman
 
+Delete unused packages
 ```bash
-pacman -S feh
+pacman -R `pacman -Qdtq`
 ```
 
-In `~/.fehbg`:
+Update packages
 ```bash
-#!/bin/sh
-feh --no-fehbg --bg-scale '$HOME/Pictures/wallpaper.png'
+pacman -Syu
+```
+
+Check if package is installed
+```bash
+pacman -Qi <pkg>
+```
+
+## i3
+```
+xprop | grep Class # Use the second string
+```
+
+### Multi monitors
+xrandr --query | grep " connected"
+Init second monitor as extend (default is duplicate)
+```
+xrandr --output HDMI2 --auto --above eDP1
+```
+
+## Screen capture
+
+```bash
+deepin-screenshot
+byzanz out.gif
+```
+
+## CMake
+
+```bash
+mkdir bin
+cd bin
+cmake -G "Unix Makefiles" ..
 ```
 
 ## Bluetooth
