@@ -16,6 +16,8 @@ Pacman:
  * xorg-xinput xorg-xprop xorg-xev
  * alsa-utils alsa-oss
  * feh (for wallpaper)
+ * unclutter
+ * numlockx
 
 AUR:
  * betterlockscreen

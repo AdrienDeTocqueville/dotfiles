@@ -1,5 +1,6 @@
 setxkbmap fr
 xmodmap ~/.config/xorg/Xmodmap
+numlockx &
 
 ~/.config/xorg/xstart
 

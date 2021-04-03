@@ -23,15 +23,15 @@ call plug#end()
 
 syntax on
 colorscheme OceanicNext
-hi StatusLine ctermbg=93
-hi StatusLineNC ctermbg=27
-hi TabLine ctermfg=15 ctermbg=242
-hi TabLineSel cterm=underline ctermbg=0 ctermfg=7
+"hi StatusLine ctermbg=93
+"hi StatusLineNC ctermbg=27
+"hi TabLine ctermfg=15 ctermbg=242
+"hi TabLineSel cterm=underline ctermbg=0 ctermfg=7
 hi Comment ctermfg=28
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-set clipboard=unnamed
+set clipboard+=unnamedplus
 set mouse=a
 set foldmethod=syntax
 set foldlevelstart=99
@@ -93,7 +93,7 @@ nnoremap <F15> :sp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
 nnoremap <F4> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
 
 " ...
-nnoremap <F5> :checktime<CR>
+nnoremap <F5> :checktime<CR>:source ~/.vimrc<CR>:echo "Reloaded"<CR>
 
 " Debugger (todo)
 nnoremap <F6> :wa <bar> :make -j8 config=debug <CR>
@@ -159,6 +159,9 @@ function ExecWithHistory(cmd)
     exec a:cmd
 endfun
 
+function! Hexdump()
+    exec "%!hexdump -C"
+endfun
 
 " SRP / C#
 autocmd BufNewFile,BufRead /mnt/a/Unity/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
