@@ -13,8 +13,9 @@ SELECTION=$(whiptail --noitem --separate-output \
 	$EXTRC on $CFG off $ROOT off $STDPAC off $ALLPAC off $BIN off\
 	3>&1 1>&2 2>&3)
 
-grep $EXTRC <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
+if [[ $SELECTION =~ $EXTRC ]]; then
+	echo "> Creating ~/.extrc config"
+
 	cat <<- END > ~/.extrc
 		vim() { nvim -O \$* }
 		alias df="df -h | grep -e sda6 -e Used"
@@ -32,43 +33,49 @@ if [ $? -eq 0 ]; then
 
 		export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/lib
 		export PATH=\$PATH:\$HOME/bin
+		export SYSTEM=$SYSTEM
 	END
 fi
 
-grep $CFG <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
-	~/dotfiles/setup.sh
+if [[ $SELECTION =~ $CFG ]]; then
+	echo "> Setting up symlinks"
 
-	ln -s ~/dotfiles/elinks ~/.elinks
-	ln -s ~/dotfiles/screenrc ~/.screenrc
+	~/dotfiles/scripts/setup_symlinks.sh
+
+	rm ~/.elinks
+	rm ~/.screenrc
+
+	ln -s ~/dotfiles/config/elinks ~/.elinks
+	ln -s ~/dotfiles/config/screenrc ~/.screenrc
+
+	rm -f ~/.config/i3
+	rm -f ~/.config/xorg
+	rm -f ~/.config/polybar
 
 	ln -s ~/dotfiles/config/i3	~/.config/i3
 	ln -s ~/dotfiles/config/xorg	~/.config/xorg
 	ln -s ~/dotfiles/config/polybar	~/.config/polybar
 fi
 
-grep $ROOT <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
+if [[ $SELECTION =~ $ROOT ]]; then
 	sudo cp ~/dotfiles/xorg/custom.map /usr/share/kbd/keymaps/
 	sudo echo KEYMAP=custom >> /etc/vconsole.conf
 	sudo ln -s ~/.config/xorg/xorg.conf /etc/X11/xorg.conf
 fi
 
-grep $STDPAC <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
+if [[ $SELECTION =~ $STDPAC ]]; then
 	sudo pacman -S alacritty rofi polybar
 	#sudo pacman -S xorg-xinput xorg-xprop xorg-xev alsa-utils alsa-oss
+	sudo pacman -S the_silver_searcher
 	sudo pacman -S feh unclutter numlockx betterlockscreen xbacklight
 	sudo pacman -S wpa_supplicant nmtui
 fi
 
-grep $ALLPAC <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
+if [[ $SELECTION =~ $ALLPAC ]]; then
 	sudo pacman -S apvlv yay
 fi
 
-grep $BIN <<< $SELECTION >/dev/null
-if [ $? -eq 0 ]; then
+if [[ $SELECTION =~ $BIN ]]; then
 	function rootsymlink() {
 		sudo test -f /usr/local/bin/$1 && sudo ln -s ~/dotfiles/$1 /usr/local/bin/$1 && chmod +x /usr/local/bin/$1
 		#&& chown root /usr/local/bin/$1

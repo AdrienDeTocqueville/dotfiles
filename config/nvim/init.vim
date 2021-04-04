@@ -15,6 +15,8 @@ Plug 'junegunn/fzf.vim'
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+" LSP
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Tmux
 " Plug 'wellle/tmux-complete.vim'
 " Plug 'christoomey/vim-tmux-navigator'

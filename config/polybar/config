@@ -21,7 +21,7 @@ foreground = ${colors.foreground}
 enable-ipc = true
 
 modules-left = i3
-modules-right = backlight volume battery date
+modules-right = vpn backlight volume battery date
 
 [module/i3]
 type = internal/i3
@@ -64,15 +64,13 @@ label-urgent-padding = 2
 
 [module/date]
 type = internal/date
-date = "%d %b %Y   %H:%M "
+date = "%d %b %Y   %H:%M "
 interval = 60
 
 [module/volume]
 type = internal/alsa
 format-volume = "<ramp-volume> <label-volume> | "
-
-label-muted = 🔇 muted
-label-muted-foreground = #66
+label-muted = "muted | "
 
 ramp-volume-0 = " "
 ramp-volume-1 = " "
@@ -102,3 +100,8 @@ ramp-capacity-4 = 
 type = internal/backlight
 card = intel_backlight
 format = "盛 <label> | "
+
+[module/vpn]
+type = custom/text
+content = " | "
+click-left = globalprotect launch-ui

@@ -11,12 +11,7 @@ APPDATA="$APPDATA/../.."
 
 sudo ln -s $BINDIR/Git/bin/git.exe  /bin/git
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl zsh ctags unzip silversearcher-ag
-
-# Oh my zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
-rm ~/.zshrc
+sudo apt install -y unzip silversearcher-ag
 
 # Neovim
 mkdir ~/nvim
