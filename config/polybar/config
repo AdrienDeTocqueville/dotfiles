@@ -11,8 +11,9 @@ alert = #bd2c40
 monitor = ${env:MONITOR:}
 bottom = true
 
-font-0 = FreeSans:pixelsize=11;2
-font-1 = FontAwesome:pixelsize=11;2
+font-0 = Source Code Pro:size=11;2
+font-1 = FontAwesome:size=11;2
+font-2 = Symbols Nerd Font:size=11;2
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -20,25 +21,37 @@ foreground = ${colors.foreground}
 enable-ipc = true
 
 modules-left = i3
-modules-right = volume date
+modules-right = backlight volume battery date
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
+format = <label-mode> <label-state>
 index-sort = true
+pin-workspaces = true
 wrapping-scroll = false
 
-label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
-; focused = Active workspace on focused monitor
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
+
+label-focused = %index% %icon%
+label-unfocused = %index% %icon%
+label-focused-padding = 1
+label-unfocused-padding = 1
+
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible-background = ${self.label-focused-background}
@@ -51,10 +64,41 @@ label-urgent-padding = 2
 
 [module/date]
 type = internal/date
-date = "%d %b %Y   %H:%M:%S"
-interval = 5
+date = "%d %b %Y   %H:%M "
+interval = 60
 
 [module/volume]
-type = custom/script
-exec = amixer get Master | grep Mono: | awk '{print "vol: "$4" | "}'
-interval = 10
+type = internal/alsa
+format-volume = "<ramp-volume> <label-volume> | "
+
+label-muted = 🔇 muted
+label-muted-foreground = #66
+
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = 
+
+; type = custom/script
+; exec = amixer get Master | grep Mono: | awk '{print "  "$4"  |  "}'
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+poll-interval = 0
+format-charging = " <label-charging> | "
+format-discharging = "<ramp-capacity> <label-discharging> | "
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+;type = custom/script
+;exec = echo " $(cat /sys/class/power_supply/BAT1/capacity)% | "
+;interval = 300
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = "盛 <label> | "

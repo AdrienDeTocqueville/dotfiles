@@ -6,7 +6,12 @@ Exec `wsl.sh`
 
 Exec `arch.sh`
 
-Note: Core dumps are located in `/var/lib/systemd/coredump/`
+## Infos
+
+Core dumps are located in `/var/lib/systemd/coredump/`
+#### Fonts
+- FiraCode / FiraMono (nerd-fonts-fira-mono on aur)
+- gucharmap or this https://github.com/wstam88/rofi-fontawesome to browse font characters
 
 ## General purpose packages
 
@@ -18,6 +23,8 @@ Pacman:
  * feh (for wallpaper)
  * unclutter
  * numlockx
+ * gucharmap
+ * xbacklight
 
 AUR:
  * betterlockscreen

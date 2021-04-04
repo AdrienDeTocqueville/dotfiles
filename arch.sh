@@ -58,7 +58,7 @@ grep $STDPAC <<< $SELECTION >/dev/null
 if [ $? -eq 0 ]; then
 	sudo pacman -S alacritty rofi polybar
 	#sudo pacman -S xorg-xinput xorg-xprop xorg-xev alsa-utils alsa-oss
-	sudo pacman -S feh unclutter numlockx betterlockscreen
+	sudo pacman -S feh unclutter numlockx betterlockscreen xbacklight
 	sudo pacman -S wpa_supplicant nmtui
 fi
 
@@ -69,7 +69,10 @@ fi
 
 grep $BIN <<< $SELECTION >/dev/null
 if [ $? -eq 0 ]; then
-	mkdir ~/bin
+	function rootsymlink() {
+		sudo test -f /usr/local/bin/$1 && sudo ln -s ~/dotfiles/$1 /usr/local/bin/$1 && chmod +x /usr/local/bin/$1
+		#&& chown root /usr/local/bin/$1
+	}
 
-	ln -s ~/dotfiles/bright ~/bin/bright
+	rootsymlink "sensitivity"
 fi
