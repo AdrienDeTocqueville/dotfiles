@@ -46,7 +46,7 @@ alias gp="git push"
 
 alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
 alias l="ls"
-alias ll="ls -a"
+alias la="ls -d .*; ls -d *"
 alias lc="clear; clear; ls"
 alias dir="dir --color"
 alias cp="cp -i"

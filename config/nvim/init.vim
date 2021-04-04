@@ -83,8 +83,10 @@ nnoremap k gk
 
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
-nnoremap <C-g> :Ag 
-vnoremap <C-g> "ay:call ExecWithHistory("Ag " . @a)<CR>
+nnoremap <C-g> :call ExecWithHistory("grep " . expand("<cword>"))<CR><CR>:cope<CR><CR>
+vnoremap <C-g> "ay:call ExecWithHistory("grep " . @a)<CR><CR>:cope<CR><CR>
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cp<CR>
 
 " Tags (f13 = shift+f1)
 nnoremap <F1> :UndotreeToggle<CR>:UndotreeFocus<CR>
@@ -107,7 +109,7 @@ nnoremap <F8> :wa <bar> :make -j8 config=release <CR>
 " Misc
 nnoremap <F10> :call DeleteHiddenBuffers()<CR>:mksession! .vim.
 nnoremap <F11> :call SwapHS()<CR>
-nnoremap <F12> :noh<CR>
+nnoremap <F12> :noh<CR>:cclose<CR>
 
 " gutentags
 let gutentags_ctags_exclude=['*.meta', '*.md']
@@ -116,11 +118,18 @@ ab #i #include
 ab #n #ifndef
 ab #e #endif
 
+autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
 	autocmd!
 	autocmd WinEnter * set cul
 	autocmd WinLeave * set nocul
 augroup END
+
+if executable('ag')
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c:%m
+endif
 
 
 function! SwapHS()

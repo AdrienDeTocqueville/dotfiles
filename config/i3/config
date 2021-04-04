@@ -171,15 +171,12 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 2
 
 focus_follows_mouse no
 
-assign [class="Opera"] $ws1
 assign [class="UE4Editor"] $ws4
 assign [class="Rhythmbox"] $ws0
 assign [class="Discord"] $ws0
 assign [class="Steam"] $ws9
 assign [class="Slack"] $ws9
 
-# browser
-exec qutebrowser
 # wallpaper
 exec --no-startup-id source ~/.config/i3/fehbg
 # polybar
