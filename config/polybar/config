@@ -70,10 +70,10 @@ interval = 60
 [module/volume]
 type = internal/alsa
 format-volume = "<ramp-volume> <label-volume> | "
-label-muted = "muted | "
+label-muted = " | "
 
-ramp-volume-0 = " "
-ramp-volume-1 = " "
+ramp-volume-0 = 
+ramp-volume-1 = 
 ramp-volume-2 = 
 
 ; type = custom/script

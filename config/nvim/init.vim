@@ -83,8 +83,8 @@ nnoremap k gk
 
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
-nnoremap <C-g> :call ExecWithHistory("grep " . expand("<cword>"))<CR><CR>:cope<CR><CR>
-vnoremap <C-g> "ay:call ExecWithHistory("grep " . @a)<CR><CR>:cope<CR><CR>
+nnoremap <C-g> :Grep 
+vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 
@@ -118,6 +118,7 @@ ab #i #include
 ab #n #ifndef
 ab #e #endif
 
+command! -nargs=+ Grep execute 'silent grep! <args>' | botright cope
 autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
 	autocmd!
@@ -164,7 +165,7 @@ function! DeleteHiddenBuffers()
     echo "Closed ".closed." hidden buffers"
 endfunction
 
-function ExecWithHistory(cmd)
+function! ExecWithHistory(cmd)
     echo a:cmd
     :call histadd("cmd", a:cmd)
     exec a:cmd
