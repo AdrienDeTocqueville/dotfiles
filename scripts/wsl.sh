@@ -1,47 +1,86 @@
 #!/bin/zsh
 
-if [ -d "/mnt/d" ] ; then
+EXTRC="Fill .extrc"
+CFG="Setup config files"
+GIT="Replace git package"
+STDPAC="Install standard packages"
+NEOVIM="Install neovim"
+CLIPBOARD="Install neovim clipboard support"
+
+SELECTION=$(whiptail --noitem --separate-output \
+	--title "Setup WSL config" \
+	--checklist "Select what to setup" 14 60 6 \
+	$EXTRC on $CFG on $STDPAC on $NEOVIM on $CLIPBOARD on $GIT off\
+	3>&1 1>&2 2>&3)
+
+echo "\n== Detecting config =="
+
+if [ -d "/mnt/d/Softwares" ] ; then
 BINDIR="/mnt/d/Softwares"
 else
 BINDIR="/mnt/c/Softwares"
 fi
 
-APPDATA=$(echo "$PATH" | grep -o "[^:]*WindowsApps[^:]*")
-APPDATA="$APPDATA/../.."
+APPDATA=$(echo "$PATH" | grep -o "[^:]*Microsoft/WindowsApps*")
 
-sudo ln -s $BINDIR/Git/bin/git.exe  /bin/git
+echo "BINDIR=" $BINDIR
+echo "APPDATA=" $APPDATA
 
-sudo apt install -y unzip silversearcher-ag
+if [[ $SELECTION =~ $EXTRC ]]; then
+	echo "\n== Creating ~/.extrc config =="
+	cat <<- END > ~/.extrc
+		vim() { ~/nvim/usr/bin/nvim -O $* }
+		goto() { cd $(wslpath $1) }
+		alias dl="/mnt/d/Downloads/"
+		alias prgm="/mnt/d/Programs/"
+		alias open="explorer.exe"
+		alias doc="vim ~/dotfiles/doc/setup.md"
 
-# Neovim
-mkdir ~/nvim
-curl -fLo ~/nvim/nvim.appimage https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-chmod u+x ~/nvim/nvim.appimage
-~/nvim/nvim.appimage --appimage-extract
-mv squashfs-root/* ~/nvim
-rm -rf squashfs-root
+		export PATH="$PATH:$BINDIR"
+		export SYSTEM=$SYSTEM
+	END
+fi
 
-### Plugin manager
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [[ $SELECTION =~ $CFG ]]; then
+	echo "\n== Setting up symlinks =="
 
-### Clipboard
-mkdir ~/win32yank
-curl -fLo ~/win32yank/yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip
-unzip ~/win32yank/yank.zip -d ~/win32yank
-mv ~/win32yank/win32yank.exe "$BINDIR" && rm -rf ~/win32yank
+	~/dotfiles/scripts/setup_symlinks.sh
+	\cp ~/dotfiles/config/settings.json $APPDATA/../../Packages/Microsoft.WindowsTerminal*/LocalState
+fi
 
-# Config files
-~/dotfiles/setup.sh
-ln -s ~/dotfiles/open_with_nvim ~/open_with_nvim
-\cp settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
+if [[ $SELECTION =~ $STDPAC ]]; then
+	echo "\n== Installing common packages =="
+	sudo apt install -y unzip silversearcher-ag
+fi
 
-# WSL specific aliases
-echo 'vim() { ~/nvim/usr/bin/nvim -O $* }'	>> ~/.extrc
-echo 'goto() { cd $(wslpath $1) }'		>> ~/.extrc
-echo 'alias dl="/mnt/d/Downloads/"'		>> ~/.extrc
-echo 'alias prgm="/mnt/d/Programs/"'		>> ~/.extrc
-echo 'alias open="explorer.exe"'		>> ~/.extrc
-echo 'export PATH="$PATH:$BINDIR"'	>> ~/.extrc
+if [[ $SELECTION =~ $NEOVIM ]]; then
+	echo "\n== Installing Neovim =="
 
-echo "Exec :PlugInstall in neovim to install plugins"
-exec zsh
+	mkdir ~/nvim
+	curl -fLo ~/nvim/nvim.appimage https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+	chmod u+x ~/nvim/nvim.appimage
+	~/nvim/nvim.appimage --appimage-extract
+	mv squashfs-root/* ~/nvim
+	rm -rf squashfs-root
+
+	#echo "\n\n\n\nExec :PlugInstall in neovim to install plugins"
+	#exec zsh
+fi
+
+if [[ $SELECTION =~ $CLIPBOARD ]]; then
+	echo "\n== Installing clipboard support for nvim =="
+
+	mkdir ~/win32yank
+	curl -fLo ~/win32yank/yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip
+	unzip ~/win32yank/yank.zip -d ~/win32yank
+	mv ~/win32yank/win32yank.exe "$BINDIR" && rm -rf ~/win32yank
+fi
+
+if [[ $SELECTION =~ $GIT ]]; then
+	echo "\n== Replacing git package =="
+	echo "WIP..."
+	if [ -d $BINDIR/Git/bin/git.exe ] ; then
+		echo "Detected git for windows"
+		sudo ln -s $BINDIR/Git/bin/git.exe  /bin/git
+	fi
+fi

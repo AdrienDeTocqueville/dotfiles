@@ -8,13 +8,14 @@ WSL="off"
 if [[ $PROC =~ "arch" ]]; then
 	SYSTEM="ARCH"
 	ARCH=on
-	alias pacinstall sudo pacman -S
+	alias pacinstall="sudo pacman -S"
 fi
 if [[ $PROC =~ "Microsoft" ]]; then
 	SYSTEM="WSL"
 	WSL=on
-	alias pacinstall sudo apt install
+	alias pacinstall="sudo apt install -y"
 	sudo apt update && sudo apt upgrade -y
+	sudo apt autoremove -y
 fi
 
 LBL_OMZ="Install oh my zsh and vim"
@@ -28,16 +29,22 @@ SELECTION=$(whiptail --noitem --separate-output \
 	3>&1 1>&2 2>&3)
 
 if [[ $SELECTION =~ $LBL_OMZ ]]; then
-	pacinstall curl neovim ctags
+	echo "\n== Installing common packages =="
+	pacinstall wget neovim ctags
 
 	# oh my zsh
-	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";
+	echo "\n== Installing oh my zsh =="
+	wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+	RUNZSH="no" sh install.sh --keep-zshrc
+	rm install.sh
 
 	# vim-plug
-	## Neovim
+	echo "\n== Installing Vim Plug =="
+	## for neovim and vim
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	## Vim
+	## exec pluginstall
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall
 fi
 
 if [[ $SELECTION =~ $LBL_ARCH ]]; then

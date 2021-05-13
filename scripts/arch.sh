@@ -14,7 +14,7 @@ SELECTION=$(whiptail --noitem --separate-output \
 	3>&1 1>&2 2>&3)
 
 if [[ $SELECTION =~ $EXTRC ]]; then
-	echo "> Creating ~/.extrc config"
+	echo "\n== Creating ~/.extrc config =="
 
 	cat <<- END > ~/.extrc
 		vim() { nvim -O \$* }
@@ -38,7 +38,7 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 fi
 
 if [[ $SELECTION =~ $CFG ]]; then
-	echo "> Setting up symlinks"
+	echo "\n== Setting up symlinks =="
 
 	~/dotfiles/scripts/setup_symlinks.sh
 
@@ -58,6 +58,8 @@ if [[ $SELECTION =~ $CFG ]]; then
 fi
 
 if [[ $SELECTION =~ $ROOT ]]; then
+	echo "\n== Setting up root user config =="
+
 	sudo cp ~/.config/xorg/custom.map /usr/share/kbd/keymaps/
 	sudo sh -c "echo KEYMAP=custom >> /etc/vconsole.conf"
 	sudo ln -s ~/.config/xorg/xorg.conf /etc/X11/xorg.conf
@@ -74,6 +76,7 @@ if [[ $SELECTION =~ $ROOT ]]; then
 fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then
+	echo "\n== Installing common packages =="
 	sudo pacman -S alacritty rofi polybar
 	#sudo pacman -S xorg-xinput xorg-xprop xorg-xev alsa-utils alsa-oss
 	sudo pacman -S the_silver_searcher
@@ -82,10 +85,12 @@ if [[ $SELECTION =~ $STDPAC ]]; then
 fi
 
 if [[ $SELECTION =~ $ALLPAC ]]; then
+	echo "\n== Installing advanced packages =="
 	sudo pacman -S apvlv yay
 fi
 
 if [[ $SELECTION =~ $BIN ]]; then
+	echo "\n== Installing custom binaries =="
 	function rootsymlink() {
 		sudo test -f /usr/local/bin/$1 && sudo ln -s ~/dotfiles/$1 /usr/local/bin/$1 && chmod +x /usr/local/bin/$1
 		#&& chown root /usr/local/bin/$1
