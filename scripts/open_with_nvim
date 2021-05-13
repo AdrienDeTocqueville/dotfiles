@@ -6,7 +6,7 @@
 # right click "shell", new key "Open With Neovim"
 # add new string value named "icon" value "D:\ONEDRIVE\Images\Logos\nvim.ico"
 # right click "Open With Neovim", new key "command"
-# add new string value "wsl.exe ~/open_with_nvim "%1""
+# add new string value "wsl.exe ~/.open_with_nvim "%1""
 
 source ~/.zshrc
 file=$(wslpath "$1")

@@ -47,6 +47,7 @@ if [[ $SELECTION =~ $CFG ]]; then
 	echo "\n== Setting up config =="
 
 	~/dotfiles/scripts/setup_symlinks.sh
+	ln -s ~/dotfiles/scripts/open_with_nvim  ~/.open_with_nvim
 	\cp ~/dotfiles/config/settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
 
 	curl -fLo /tmp/FiraCode.zip https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
