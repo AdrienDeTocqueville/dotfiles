@@ -22,6 +22,7 @@ BINDIR="/mnt/c/Softwares"
 fi
 
 APPDATA=$(echo "$PATH" | grep -o "[^:]*Microsoft/WindowsApps*")
+APPDATA="$APPDATA/../.."
 
 echo "BINDIR=" $BINDIR
 echo "APPDATA=" $APPDATA
@@ -34,7 +35,7 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 		alias dl="/mnt/d/Downloads/"
 		alias prgm="/mnt/d/Programs/"
 		alias open="explorer.exe"
-		alias dot="cd \$HOME/dotfiles"
+		alias dot="cd ~/dotfiles"
 		alias doc="vim ~/dotfiles/doc/setup.md"
 
 		export PATH="$PATH:$BINDIR"
@@ -43,10 +44,16 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 fi
 
 if [[ $SELECTION =~ $CFG ]]; then
-	echo "\n== Setting up symlinks =="
+	echo "\n== Setting up config =="
 
 	~/dotfiles/scripts/setup_symlinks.sh
-	\cp ~/dotfiles/config/settings.json $APPDATA/../../Packages/Microsoft.WindowsTerminal*/LocalState
+	\cp ~/dotfiles/config/settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
+
+	curl -fLo /tmp/FiraCode.zip https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
+	unzip /tmp/FiraCode.zip -d /tmp/FiraCode
+	mkdir $APPDATA/Temp/ttf
+	mv /tmp/FiraCode/ttf/FiraCode-Regular.ttf $APPDATA/Temp/ttf
+	explorer.exe $(wslpath -w $APPDATA/Temp/ttf)
 fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then

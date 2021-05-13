@@ -33,7 +33,7 @@ hi Comment ctermfg=28
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set mouse=a
 set foldmethod=syntax
 set foldlevelstart=99
