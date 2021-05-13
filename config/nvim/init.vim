@@ -119,7 +119,7 @@ ab #n #ifndef
 ab #e #endif
 
 command! -nargs=+ Grep execute 'silent grep! <args>' | botright cope
-"autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
 	autocmd!
 	autocmd WinEnter * set cul

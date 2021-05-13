@@ -29,11 +29,12 @@ echo "APPDATA=" $APPDATA
 if [[ $SELECTION =~ $EXTRC ]]; then
 	echo "\n== Creating ~/.extrc config =="
 	cat <<- END > ~/.extrc
-		vim() { ~/nvim/usr/bin/nvim -O $* }
-		goto() { cd $(wslpath $1) }
+		vim() { ~/.nvim/bin/nvim -O \$* }
+		goto() { cd \$(wslpath \$1) }
 		alias dl="/mnt/d/Downloads/"
 		alias prgm="/mnt/d/Programs/"
 		alias open="explorer.exe"
+		alias dot="cd \$HOME/dotfiles"
 		alias doc="vim ~/dotfiles/doc/setup.md"
 
 		export PATH="$PATH:$BINDIR"
@@ -56,12 +57,9 @@ fi
 if [[ $SELECTION =~ $NEOVIM ]]; then
 	echo "\n== Installing Neovim =="
 
-	mkdir ~/nvim
-	curl -fLo ~/nvim/nvim.appimage https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-	chmod u+x ~/nvim/nvim.appimage
-	~/nvim/nvim.appimage --appimage-extract
-	mv squashfs-root/* ~/nvim
-	rm -rf squashfs-root
+	curl -fLo /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+	tar xzf /tmp/nvim.tar.gz -C /tmp
+	mv /tmp/nvim-linux64 ~/.nvim
 
 	#echo "\n\n\n\nExec :PlugInstall in neovim to install plugins"
 	#exec zsh
