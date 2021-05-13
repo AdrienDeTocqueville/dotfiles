@@ -58,9 +58,19 @@ if [[ $SELECTION =~ $CFG ]]; then
 fi
 
 if [[ $SELECTION =~ $ROOT ]]; then
-	sudo cp ~/dotfiles/xorg/custom.map /usr/share/kbd/keymaps/
-	sudo echo KEYMAP=custom >> /etc/vconsole.conf
+	sudo cp ~/.config/xorg/custom.map /usr/share/kbd/keymaps/
+	sudo sh -c "echo KEYMAP=custom >> /etc/vconsole.conf"
 	sudo ln -s ~/.config/xorg/xorg.conf /etc/X11/xorg.conf
+
+	sudo chown -R root:root $ZSH
+
+	sudo mkdir -p /root/.config
+	sudo ln -s ~/dotfiles /root/dotfiles
+	sudo rm -rf /root/.vim /root/.config /root/.zshrc /root/.vimrc
+	sudo ln -s ~/.vim	/root/.vim
+	sudo ln -s ~/.config	/root/.config
+	sudo ln -s ~/dotfiles/config/zshrc		/root/.zshrc
+	sudo ln -s ~/dotfiles/config/nvim/init.vim	/root/.vimrc
 fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then

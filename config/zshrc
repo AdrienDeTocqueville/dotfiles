@@ -1,12 +1,23 @@
-# ZSH things
-export ZSH="$HOME/.oh-my-zsh"
+# Detect ZSH install directory
+if [ -d "$HOME/.oh-my-zsh" ] ; then
+	export ZSH="$HOME/.oh-my-zsh"
+else
+	getent passwd | while IFS=: read -r name password uid gid gecos home shell; do
+		if [[ $home =~ "/home/*" && -d "$home/.oh-my-zsh" ]] ; then
+			export ZSH="$home/.oh-my-zsh"
+		fi
+	done
+fi
 
+# ZSH things
 ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export HISTFILE=~/.histfile_zsh
 
 # disable zsh git completion
 compdef -d git checkout
@@ -90,6 +101,9 @@ vi() {
 
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
+if [[ "$EUID" == 0 ]] ; then # check if root user
+	export PROMPT="%{$fg[red]%}[root] $PROMPT"
+fi
 
 
-source $HOME/.extrc
+[[ -f "$HOME/.extrc" ]] && source $HOME/.extrc
