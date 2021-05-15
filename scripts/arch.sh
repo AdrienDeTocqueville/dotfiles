@@ -76,17 +76,23 @@ if [[ $SELECTION =~ $ROOT ]]; then
 fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then
-	echo "\n== Installing common packages =="
-	sudo pacman -S alacritty rofi polybar
-	#sudo pacman -S xorg-xinput xorg-xprop xorg-xev alsa-utils alsa-oss
+	echo "\n== Installing standard packages =="
 	sudo pacman -S the_silver_searcher
-	sudo pacman -S feh unclutter numlockx betterlockscreen xbacklight
-	sudo pacman -S wpa_supplicant nmtui
+	sudo pacman -S numlockx wpa_supplicant nmtui
 fi
 
 if [[ $SELECTION =~ $ALLPAC ]]; then
 	echo "\n== Installing advanced packages =="
-	sudo pacman -S apvlv yay
+	
+	pacman -S --needed git base-devel
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
+
+	sudo yay -S apvlv polybar
+	sudo pacman -S alacritty rofi
+	sudo pacman -S feh unclutter betterlockscreen xorg-xbacklight
+	#sudo pacman -S xorg-xinput xorg-xprop xorg-xev alsa-utils alsa-oss
 fi
 
 if [[ $SELECTION =~ $BIN ]]; then
