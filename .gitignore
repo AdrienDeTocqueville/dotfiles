@@ -1,2 +1,8 @@
 .netrwhist
+
 config/xorg/xorg.conf
+
+config/elinks/bookmarks
+config/elinks/cookies
+config/elinks/globhist
+config/elinks/searchhist

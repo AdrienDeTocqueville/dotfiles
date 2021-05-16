@@ -6,6 +6,18 @@ Exec `wsl.sh`
 
 Exec `arch.sh`
 
+## sudo
+
+```bash
+pacman -S sudo
+visudo /etc/sudoers
+```
+
+```bash
+useradd otarie --create-home
+passwd otarie
+```
+
 ## Infos
 
 Core dumps are located in `/var/lib/systemd/coredump/`
