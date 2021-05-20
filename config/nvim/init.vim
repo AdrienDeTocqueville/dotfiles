@@ -1,7 +1,6 @@
 autocmd!
 
 call plug#begin('~/.vim/plugged')
-Plug 'tomasiser/vim-code-dark'
 Plug 'mhartington/oceanic-next'
 
 Plug 'sheerun/vim-polyglot'
@@ -13,8 +12,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " Tags
+if $CONTEXT_MENU != "1"
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+endif
 " LSP
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Tmux
@@ -97,7 +98,7 @@ nnoremap <F15> :sp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
 nnoremap <F4> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
 
 " ...
-nnoremap <F5> :checktime<CR>:source ~/.vimrc<CR>:echo "Reloaded"<CR>
+nnoremap <F5> :checktime<CR>
 
 " Debugger (todo)
 nnoremap <F6> :wa <bar> :make -j8 config=debug <CR>
@@ -118,7 +119,7 @@ ab #i #include
 ab #n #ifndef
 ab #e #endif
 
-command! -nargs=+ Grep execute 'silent grep! <args>' | botright cope
+command! -nargs=+ Grep execute 'silent grep! "<args>"' | botright cope
 autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
 	autocmd!
