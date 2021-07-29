@@ -24,6 +24,9 @@ endif
 " LaTeX
 call plug#end()
 
+call system("git rev-parse --git-dir > /dev/null 2>&1")
+let is_git_repo = v:shell_error == 0
+
 syntax on
 colorscheme OceanicNext
 "hi StatusLine ctermbg=93
@@ -61,7 +64,7 @@ set laststatus=2
 set scrolloff=5
 set backspace=indent,eol,start
 set norelativenumber
-
+set inccommand=nosplit
 au FocusGained * :checktime
 
 filetype plugin on
@@ -81,21 +84,29 @@ nnoremap <Right> :vertical resize -2<CR>
 
 nnoremap j gj
 nnoremap k gk
+nnoremap gp `[v`]
+
+if is_git_repo
+	nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
+else
+	nnoremap <C-f> :FZF<CR>
+endif
 
 nnoremap <C-t> :tabe %<CR>
-nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 nnoremap <C-g> :Grep 
 vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 
 " Tags (f13 = shift+f1)
-nnoremap <F1> :UndotreeToggle<CR>:UndotreeFocus<CR>
+nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
 nnoremap <F13> :TagbarToggle<CR>
-nnoremap <F2> :call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F3> :vsp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F15> :sp<CR>::call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F4> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F2>  :call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F14> :call ExecWithHistory("tag " . @*)<CR>
+nnoremap <F3>  :sp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F15> :vsp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F16> :tab split<CR>:call ExecWithHistory("tag " . @*)<CR>:execute "normal! zz"<CR>
 
 " ...
 nnoremap <F5> :checktime<CR>
@@ -113,6 +124,7 @@ nnoremap <F11> :call SwapHS()<CR>
 nnoremap <F12> :noh<CR>:cclose<CR>
 
 " gutentags
+let g:fzf_buffers_jump = 1
 let gutentags_ctags_exclude=['*.meta', '*.md']
 
 ab #i #include
@@ -133,6 +145,13 @@ if executable('ag')
     set grepformat=%f:%l:%c:%m
 endif
 
+
+function! Edit()
+    exec "!explorer.exe `wslpath -w %:p`"
+endfun
+function! Reveal()
+    exec "!explorer.exe `wslpath -w %:p:h`"
+endfun
 
 function! SwapHS()
 	let next_exts = { }
@@ -176,17 +195,13 @@ function! Hexdump()
     exec "%!hexdump -C"
 endfun
 
-" SRP / C#
-autocmd BufNewFile,BufRead /mnt/a/Unity/**/* set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-autocmd BufNewFile,BufRead /mnt/d/Unity/Unity/**/*       set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-autocmd BufNewFile,BufRead /mnt/d/Unity/**/*             set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 " Syntax
-autocmd BufNewFile,BufRead *.shader set filetype=hlsl
-autocmd BufNewFile,BufRead *.compute set filetype=hlsl
-autocmd BufNewFile,BufRead *.cginc set filetype=hlsl
-autocmd BufNewFile,BufRead *.template set filetype=hlsl
+autocmd BufNewFile,BufRead *.shader,*.compute,*.cginc,*.template,*.usf,*.ush set filetype=hlsl
 autocmd BufNewFile,BufRead *.mat set filetype=yaml
 autocmd BufNewFile,BufRead *.uss set filetype=css
 autocmd BufNewFile,BufRead *.uxml set filetype=xml
 let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'Packages', 'artifacts', 'build', 'Art', 'Library']
+
+" SRP / C#
+au FileType cs,cpp,hlsl set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
