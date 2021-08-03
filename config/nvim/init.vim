@@ -101,12 +101,12 @@ nnoremap <C-p> :cp<CR>
 " Tags (f13 = shift+f1)
 nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
 nnoremap <F13> :TagbarToggle<CR>
-nnoremap <F2>  :call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F14> :call ExecWithHistory("tag " . @*)<CR>
-nnoremap <F3>  :sp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F15> :vsp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F16> :tab split<CR>:call ExecWithHistory("tag " . @*)<CR>:execute "normal! zz"<CR>
+nnoremap <F2>  :call ExecWithHistory("tj " . expand("<cword>"))<CR>
+nnoremap <F14> :call ExecWithHistory("tj " . @*)<CR>
+nnoremap <F3>  :sp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+nnoremap <F15> :vsp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+nnoremap <F16> :tab split<CR>:call ExecWithHistory("tj " . @*)<CR>:execute "normal! zz"<CR>
 
 " ...
 nnoremap <F5> :checktime<CR>
