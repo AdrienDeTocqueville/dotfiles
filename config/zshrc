@@ -101,7 +101,7 @@ vi() {
 
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
-if [[ "$EUID" == 0 ]] ; then # check if root user
+if [[ "$SYSTEM" == "ARCH" && "$EUID" == 0 ]] ; then # check if root user
 	export PROMPT="%{$fg[red]%}[root] $PROMPT"
 fi
 
