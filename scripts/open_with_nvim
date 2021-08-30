@@ -12,3 +12,4 @@ source ~/.extrc
 file=$(wslpath "$1")
 cd "$(dirname "$file")"
 CONTEXT_MENU="1" vim "$file"
+exec zsh
