@@ -106,4 +106,16 @@ if [[ "$SYSTEM" == "ARCH" && "$EUID" == 0 ]] ; then # check if root user
 fi
 
 
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+bindkey '^r' history-incremental-search-backward
+bindkey '^s' history-incremental-search-forward
+
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+
+
 [[ -f "$HOME/.extrc" ]] && source $HOME/.extrc
