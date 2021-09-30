@@ -37,8 +37,10 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 		alias open="explorer.exe"
 		alias dot="cd ~/dotfiles"
 		alias doc="vim ~/dotfiles/doc/setup.md"
+		
+		alias rp="cd /mnt/; vim"
 
-		export PATH="$PATH:$BINDIR"
+		export PATH="\$PATH:$BINDIR"
 		export SYSTEM=$SYSTEM
 	END
 fi
