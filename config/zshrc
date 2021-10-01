@@ -14,6 +14,8 @@ ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 
+plugins+=(zsh-vi-mode)
+
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -105,18 +107,5 @@ export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
 if [[ "$SYSTEM" == "ARCH" && "$EUID" == 0 ]] ; then # check if root user
 	export PROMPT="%{$fg[red]%}[root] $PROMPT"
 fi
-
-
-bindkey -v
-
-bindkey '^P' up-history
-bindkey '^N' down-history
-
-bindkey '^r' history-incremental-search-backward
-bindkey '^s' history-incremental-search-forward
-
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-
 
 [[ -f "$HOME/.extrc" ]] && source $HOME/.extrc
