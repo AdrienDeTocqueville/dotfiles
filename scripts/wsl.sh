@@ -70,6 +70,9 @@ if [[ $SELECTION =~ $NEOVIM ]]; then
 	tar xzf /tmp/nvim.tar.gz -C /tmp
 	mv /tmp/nvim-linux64 ~/.nvim
 
+	# Vi bindings
+	git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
+
 	#echo "\n\n\n\nExec :PlugInstall in neovim to install plugins"
 	#exec zsh
 fi
