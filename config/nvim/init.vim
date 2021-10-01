@@ -97,6 +97,7 @@ nnoremap <C-g> :Grep
 vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
+cnoremap <C-r> :History:<CR>
 
 " Tags (f13 = shift+f1)
 nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
