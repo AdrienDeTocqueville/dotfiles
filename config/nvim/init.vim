@@ -205,3 +205,4 @@ let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestPr
 
 " SRP / C#
 au FileType cs,cpp,hlsl set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+au FileType hlsl set includeexpr=substitute(v:fname,'Packages','/mnt/a/Unity/Graphics/Graphics','g')
