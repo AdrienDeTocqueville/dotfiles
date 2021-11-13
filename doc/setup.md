@@ -21,6 +21,7 @@ passwd otarie
 ## Infos
 
 Core dumps are located in `/var/lib/systemd/coredump/`
+
 #### Fonts
 - FiraCode / FiraMono (nerd-fonts-fira-mono on aur)
 - gucharmap or this https://github.com/wstam88/rofi-fontawesome to browse font characters
@@ -76,6 +77,10 @@ Init second monitor as extend (default is duplicate)
 ```
 xrandr --output HDMI2 --auto --above eDP1
 ```
+
+### Orientation
+
+xrandr --orientation 1
 
 ## Screen capture
 
