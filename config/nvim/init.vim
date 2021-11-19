@@ -85,9 +85,12 @@ nnoremap <Right> :vertical resize -2<CR>
 nnoremap j gj
 nnoremap k gk
 nnoremap gp `[v`]
+nnoremap go :call Reveal()<CR><CR>
+
+nnoremap - :tabe ~/.vimrc<CR>
 
 if is_git_repo
-	nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:*.md'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
+	nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:Test*/*' ':!:Doc*/*'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 else
 	nnoremap <C-f> :FZF<CR>
 endif
@@ -97,7 +100,7 @@ nnoremap <C-g> :Grep
 vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
-cnoremap <C-r> :History:<CR>
+cnoremap <C-f> :History:<CR>
 
 " Tags (f13 = shift+f1)
 nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
@@ -205,5 +208,5 @@ let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'Packages', 'artifacts', 'build', 'Art', 'Library']
 
 " SRP / C#
-au FileType cs,cpp,hlsl set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+au FileType cs,cpp,hlsl,xml,md set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 au FileType hlsl set includeexpr=substitute(v:fname,'Packages','/mnt/a/Unity/Graphics/Graphics','g')
