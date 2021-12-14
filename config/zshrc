@@ -14,7 +14,7 @@ ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 
-plugins+=(zsh-vi-mode)
+#plugins+=(zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 #source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
