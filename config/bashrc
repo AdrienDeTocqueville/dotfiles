@@ -1,0 +1,19 @@
+
+alias gcl="git clone"
+alias gm="git commit -m"
+alias ga="git add .; git status ."
+alias gu="git add -u; git status ." # doesn't add newly created files
+alias gap="git add -p"
+alias gs="git status ."
+alias gg="git grep -n"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias grh="git reset --hard"
+alias grhh="git reset --hard HEAD"
+alias gro="git reset --hard \$(git rev-parse --abbrev-ref --symbolic-full-name @{u})"
+alias gfm="git fetch origin master:master"
+alias gfm="git fetch origin trunk:trunk"
+
+alias gc="git checkout"
+alias gl="git pull"
+alias gp="git push"
