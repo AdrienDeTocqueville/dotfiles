@@ -37,7 +37,7 @@ hi Comment ctermfg=28
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-set clipboard=unnamedplus
+set clipboard+=unnamed
 set mouse=a
 set foldmethod=syntax
 set foldlevelstart=99
@@ -84,6 +84,7 @@ nnoremap <Right> :vertical resize -2<CR>
 
 nnoremap j gj
 nnoremap k gk
+nnoremap Y yy
 nnoremap gp `[v`]
 nnoremap go :call Reveal()<CR><CR>
 
