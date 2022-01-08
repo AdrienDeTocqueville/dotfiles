@@ -25,6 +25,8 @@ fi
 APPDATA=$(echo "$PATH" | grep -o "[^:]*Microsoft/WindowsApps*")
 APPDATA="$APPDATA/../.."
 
+WINHOME=$(wslpath "$(wslvar USERPROFILE)")
+
 echo "BINDIR=" $BINDIR
 echo "APPDATA=" $APPDATA
 
@@ -42,6 +44,7 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 		alias rp="cd /mnt/; vim"
 
 		export PATH="\$PATH:$BINDIR"
+		export WINHOME=$WINHOME
 		export SYSTEM=$SYSTEM
 	END
 fi
@@ -56,7 +59,8 @@ if [[ $SELECTION =~ $CFG ]]; then
 
 	~/dotfiles/scripts/setup_symlinks.sh
 	\cp ~/dotfiles/config/settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
-	\cp ~/dotfiles/config/bashrc $(wslpath "$(wslvar USERPROFILE)")/.bashrc
+	\cp ~/dotfiles/config/bashrc $WINHOME/.bashrc
+	\cp ~/dotfiles/config/gitignore $WINHOME/.gitignore
 
 	#curl -fLo /tmp/FiraCode.zip https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
 	#unzip /tmp/FiraCode.zip -d /tmp/FiraCode
