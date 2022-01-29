@@ -21,7 +21,7 @@ foreground = ${colors.foreground}
 enable-ipc = true
 
 modules-left = i3
-modules-right = vpn backlight volume battery date sleep
+modules-right = xmodmap explorer opera backlight volume battery date sleep
 
 [module/i3]
 type = internal/i3
@@ -110,3 +110,19 @@ click-left = globalprotect launch-ui
 type = custom/text
 content = "  "
 click-left = systemctl suspend
+
+[module/opera]
+type = custom/text
+content = " | "
+click-left = opera
+
+[module/explorer]
+type = custom/text
+content = " | "
+click-left = thunar
+
+[module/xmodmap]
+type = custom/text
+content = " | "
+click-left = xmodmap ~/.config/xorg/Xmodmap
+
