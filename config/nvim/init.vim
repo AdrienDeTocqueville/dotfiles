@@ -100,6 +100,7 @@ endif
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-g> :Grep 
 vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
+vnoremap <C-h> "ay:%s/<C-r>a//g<left><left><left>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 cnoremap <C-f> :History:<CR>
@@ -213,5 +214,5 @@ let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'artifacts', 'build', 'Art', 'Library']
 
 " SRP / C#
-au FileType cs,cpp,hlsl,xml,md set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
 au FileType hlsl set includeexpr=substitute(v:fname,'Packages','..','g')
