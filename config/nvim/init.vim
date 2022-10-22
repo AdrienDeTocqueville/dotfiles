@@ -35,7 +35,7 @@ colorscheme OceanicNext
 "hi TabLineSel cterm=underline ctermbg=0 ctermfg=7
 hi Comment ctermfg=28
 hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\t\|\(\s\+$\)/
 
 set clipboard+=unnamed
 set mouse=a
@@ -87,6 +87,7 @@ nnoremap k gk
 nnoremap Y yy
 nnoremap gp `[v`]
 nnoremap go :call Reveal()<CR><CR>
+vnoremap p "_dP
 
 nnoremap - :tabe ~/.vimrc<CR>
 
@@ -103,15 +104,18 @@ nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 cnoremap <C-f> :History:<CR>
 
-" Tags (f13 = shift+f1)
+" Tags (f13 = shift+f1, f25 = ctrl+f1)
 nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
 nnoremap <F13> :TagbarToggle<CR>
 nnoremap <F2>  :call ExecWithHistory("tj " . expand("<cword>"))<CR>
 nnoremap <F14> :call ExecWithHistory("tj " . @*)<CR>
+nnoremap <F26> :call ExecWithHistory("tag " . expand("<cword>"))<CR>
 nnoremap <F3>  :sp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
 nnoremap <F15> :vsp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+nnoremap <F27> :vsp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
 nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
 nnoremap <F16> :tab split<CR>:call ExecWithHistory("tj " . @*)<CR>:execute "normal! zz"<CR>
+nnoremap <F28> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
 
 " ...
 nnoremap <F5> :checktime<CR>
@@ -206,8 +210,8 @@ autocmd BufNewFile,BufRead *.mat set filetype=yaml
 autocmd BufNewFile,BufRead *.uss set filetype=css
 autocmd BufNewFile,BufRead *.uxml set filetype=xml
 let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
-let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'Packages', 'artifacts', 'build', 'Art', 'Library']
+let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'artifacts', 'build', 'Art', 'Library']
 
 " SRP / C#
 au FileType cs,cpp,hlsl,xml,md set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-au FileType hlsl set includeexpr=substitute(v:fname,'Packages','/mnt/a/Unity/Graphics/Graphics','g')
+au FileType hlsl set includeexpr=substitute(v:fname,'Packages','..','g')
