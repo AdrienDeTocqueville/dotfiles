@@ -92,9 +92,9 @@ vnoremap p "_dP
 nnoremap - :tabe ~/.vimrc<CR>
 
 if is_git_repo
-	nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:Test*/*' ':!:Doc*/*'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
+    nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:Test*/*' ':!:Doc*/*'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
 else
-	nnoremap <C-f> :FZF<CR>
+    nnoremap <C-f> :FZF<CR>
 endif
 
 nnoremap <C-t> :tabe %<CR>
@@ -144,9 +144,9 @@ ab #e #endif
 command! -nargs=+ Grep execute 'silent grep! "<args>"' | botright cope
 autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
-	autocmd!
-	autocmd WinEnter * set cul
-	autocmd WinLeave * set nocul
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
 augroup END
 
 if executable('ag')
@@ -164,22 +164,22 @@ function! Reveal()
 endfun
 
 function! SwapHS()
-	let next_exts = { }
-	let next_exts['cpp'] = ['inl', 'hpp', 'h']
-	let next_exts['c'] = ['h']
-	let next_exts['inl'] = ['h', 'cpp', 'c']
-	let next_exts['h'] = ['cpp', 'c', 'inl']
-	let next_exts['frag'] = ['vert']
-	let next_exts['vert'] = ['frag']
-	let next_exts['cs'] = ['cs.hlsl', 'hlsl']
-	for next_ext in get(next_exts, expand("%:e"), [])
-		let l:next_file = substitute(expand("%:."), expand("%:e")."$", next_ext, "")
-		if filereadable(l:next_file)
-			exec "e " l:next_file
-			return
-		endif
-	endfor
-	echo "No file to swap to"
+    let next_exts = { }
+    let next_exts['cpp'] = ['inl', 'hpp', 'h']
+    let next_exts['c'] = ['h']
+    let next_exts['inl'] = ['h', 'cpp', 'c']
+    let next_exts['h'] = ['cpp', 'c', 'inl']
+    let next_exts['frag'] = ['vert']
+    let next_exts['vert'] = ['frag']
+    let next_exts['cs'] = ['cs.hlsl', 'hlsl']
+    for next_ext in get(next_exts, expand("%:e"), [])
+        let l:next_file = substitute(expand("%:."), expand("%:e")."$", next_ext, "")
+        if filereadable(l:next_file)
+            exec "e " l:next_file
+            return
+        endif
+    endfor
+    echo "No file to swap to"
 endfun
 
 function! DeleteHiddenBuffers()

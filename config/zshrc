@@ -1,12 +1,12 @@
 # Detect ZSH install directory
 if [ -d "$HOME/.oh-my-zsh" ] ; then
-	export ZSH="$HOME/.oh-my-zsh"
+    export ZSH="$HOME/.oh-my-zsh"
 else
-	getent passwd | while IFS=: read -r name password uid gid gecos home shell; do
-		if [[ $home =~ "/home/*" && -d "$home/.oh-my-zsh" ]] ; then
-			export ZSH="$home/.oh-my-zsh"
-		fi
-	done
+    getent passwd | while IFS=: read -r name password uid gid gecos home shell; do
+    if [[ $home =~ "/home/*" && -d "$home/.oh-my-zsh" ]] ; then
+        export ZSH="$home/.oh-my-zsh"
+    fi
+done
 fi
 
 # ZSH things
@@ -28,11 +28,11 @@ compdef -d git checkout
 
 
 x() {
-	if [ -z "$driver" ] ; then
-		driver="intel"
-	fi
-	cp ~/.config/xorg/xorg.conf.$driver ~/.config/xorg/xorg.conf
-	startx ~/.config/xorg/xinitrc
+    if [ -z "$driver" ] ; then
+        driver="intel"
+    fi
+    cp ~/.config/xorg/xorg.conf.$driver ~/.config/xorg/xorg.conf
+    startx ~/.config/xorg/xinitrc
 }
 
 
@@ -59,7 +59,11 @@ alias gc="git checkout"
 alias gl="git pull"
 alias gp="git push"
 
-alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
+if [[ $SYSTEM == "MAC" ]] ; then
+    alias ls="\ls -lh --color=always"
+else
+    alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
+fi
 alias l="ls"
 alias la="ls -d .*; ls -d *"
 alias lc="clear; clear; ls"
@@ -70,7 +74,6 @@ alias mv="mv -i"
 alias k="gcc -Wall -Werror -Wextra"
 alias vg="valgrind --leak-check=full"
 
-alias make="make -j$(nproc)"
 alias gdb="gdb -q"
 alias dirs="dirs -vp"
 alias df="df -h"
@@ -81,32 +84,32 @@ alias du="du -sh"
 
 # Functions
 help() {
-	bash -c "help $1"
+    bash -c "help $1"
 }
 
 nstr() {
-	num=$1
-	str=$2
-	v=$(printf "%-${num}s" "$str")
-	echo "${v// /$str}"
+    num=$1
+    str=$2
+    v=$(printf "%-${num}s" "$str")
+    echo "${v// /$str}"
 }
 
 hex() {
-	echo $((16#$1))
+    echo $((16#$1))
 }
 
 vi() {
-	if [ -z "$1" ] ; then
-		vim -S .vim.*
-	else
-		vim -S .vim.$1
-	fi
+    if [ -z "$1" ] ; then
+        vim -S .vim.*
+    else
+        vim -S .vim.$1
+    fi
 }
 
 
 export PROMPT="%{$fg[green]%}> %{$fg[cyan]%}%2~%{$reset_color%} "
 if [[ "$SYSTEM" == "ARCH" && "$EUID" == 0 ]] ; then # check if root user
-	export PROMPT="%{$fg[red]%}[root] $PROMPT"
+    export PROMPT="%{$fg[red]%}[root] $PROMPT"
 fi
 
 [[ -f "$HOME/.extrc" ]] && source $HOME/.extrc
