@@ -17,7 +17,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 endif
 " LSP
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'dense-analysis/ale'
 " Tmux
 " Plug 'wellle/tmux-complete.vim'
 " Plug 'christoomey/vim-tmux-navigator'
@@ -42,6 +43,15 @@ set mouse=a
 set foldmethod=syntax
 set foldlevelstart=99
 set foldlevel=99
+
+set completeopt=menu " disable preview window
+let g:ale_linters = { 'cs': ['OmniSharp'] }
+
+" server stuff
+if !empty($SERVER)
+    silent exec "!python3 ~/.vim/db.py $SERVER open " . serverlist()[0]
+    autocmd VimLeavePre * exec "!python3 ~/.vim/db.py $SERVER close"
+endif
 
 set ai
 set si

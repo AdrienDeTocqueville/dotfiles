@@ -22,7 +22,7 @@ fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then
     echo "\n== Installing standard packages =="
-    sudo pacman -S the_silver_searcher
+    brew install the_silver_searcher python3
 fi
 
 if [[ $SELECTION =~ $ALLPAC ]]; then
