@@ -9,8 +9,7 @@ Plug 'mbbill/undotree'
 " Git
 Plug 'tpope/vim-fugitive'
 " Search
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " Tags
 if $CONTEXT_MENU != "1"
 Plug 'ludovicchabant/vim-gutentags'
@@ -63,7 +62,7 @@ set hidden
 set autoread
 set wildmenu
 set wildmode=longest,full
-set wildignore=*.o,*~,*.pyc
+set wildignore=*.o,*~,*.pyc,*.meta,*.png
 set showcmd
 set splitbelow
 set splitright
@@ -102,10 +101,10 @@ vnoremap p "_dP
 nnoremap - :tabe ~/.vimrc<CR>
 
 if is_git_repo
-    nnoremap <C-f> :call fzf#run({'source': "git ls-files -- . ':!:*.meta' ':!:Test*/*' ':!:Doc*/*'", 'sink': 'e', 'top': '40%', 'options': '-e'})<CR>
-else
-    nnoremap <C-f> :FZF<CR>
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
+let g:ctrlp_working_path_mode = 'a'
+nnoremap <C-f> :CtrlP<CR>
 
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-g> :Grep 

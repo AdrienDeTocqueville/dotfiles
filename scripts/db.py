@@ -2,25 +2,26 @@
 
 import sys, os
 
-FILE=os.path.expanduser('~') + "/.vim/db"
+FILE="/tmp/vim_db"
 SEPARATOR=":"
 DB = {}
 
 def parse_db():
-    f = open(FILE, "r")
-    for line in f:
-        x = line.rstrip().split(SEPARATOR)
-        DB[x[0]] = x[1]
+    DB.clear()
+    try:
+        f = open(FILE, "r")
+        for line in f:
+            x = line.rstrip().split(SEPARATOR)
+            DB[x[0]] = x[1]
+        f.close()
+    except FileNotFoundError:
+        pass
 
 def write_db():
     f = open(FILE, "w+")
     for key, value in DB.items():
         f.write(key + SEPARATOR + value + '\n')
-
-try:
-    parse_db()
-except FileNotFoundError:
-    DB = {}
+    f.close()
 
 if __name__ == "__main__":
     name=sys.argv[1]
