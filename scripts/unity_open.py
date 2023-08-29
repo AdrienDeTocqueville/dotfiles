@@ -62,7 +62,8 @@ VIMRC = """
 silent exec '!python3 ~/.vim/db.py {project} open ' . serverlist()[0]
 let g:ctrlp_user_command = 'rg -L --files /tmp/{project}/links'
 let g:ctrlp_follow_symlinks=1
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+command! -nargs=+ Grep execute 'silent grep! "<args>" /tmp/{project}/links' | botright cope
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ -L
 set expandtab tabstop=4 foldmarker={{,}} foldmethod=marker foldlevelstart=99 foldlevel=99
 au FileType hlsl set includeexpr=substitute(v:fname,'Packages','..','g')
 autocmd VimLeavePre * exec '!python3 ~/.vim/db.py {project} close'
@@ -117,13 +118,15 @@ else:
 socket = db.DB[project]
 cmd = ""
 if file is not None:
+    file = file.replace(' ','\ ')
     cmd += f":tab drop {file}<CR>"
 if line is not None:
-    cmd += f":{line}<CR>"
+    cmd += f":{line}<CR>zz"
 if column is not None:
     cmd += f"{column}|"
 
-logging.info(f"server {socket}")
-logging.info(f"nvim {cmd}")
-ret = os.system(f"{NVIM} --server {socket} --remote-send '{cmd}'")
+cmd = f"{NVIM} --server {socket} --remote-send '{cmd}'"
+ret = os.system(cmd)
+
+logging.info(f"{cmd}")
 logging.info(f"return {ret}")
