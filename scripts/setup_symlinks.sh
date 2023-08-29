@@ -5,6 +5,7 @@ ln -s ~/dotfiles/config/gdbinit		~/.gdbinit
 ln -s ~/dotfiles/config/tmux.conf	~/.tmux.conf
 ln -s ~/dotfiles/config/gitconfig	~/.gitconfig
 ln -s ~/dotfiles/config/gitignore	~/.gitignore
+ln -s ~/dotfiles/config/ignore		~/.ignore
 ln -s ~/dotfiles/config/ctags		~/.ctags
 
 mkdir -p ~/.vim

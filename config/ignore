@@ -1,0 +1,10 @@
+/artifacts/
+/build/
+**/Tests/
+Samples~/
+
+*.assets
+Assets/(?!.+\.cs$).+$
+
+*.meta
+*.png

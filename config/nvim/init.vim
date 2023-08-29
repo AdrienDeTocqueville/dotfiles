@@ -45,12 +45,7 @@ set foldlevel=99
 
 set completeopt=menu " disable preview window
 let g:ale_linters = { 'cs': ['OmniSharp'] }
-
-" server stuff
-if !empty($SERVER)
-    silent exec "!python3 ~/.vim/db.py $SERVER open " . serverlist()[0]
-    autocmd VimLeavePre * exec "!python3 ~/.vim/db.py $SERVER close"
-endif
+"let g:ale_virtualtext_cursor = 'disabled'
 
 set ai
 set si
@@ -109,7 +104,7 @@ nnoremap <C-f> :CtrlP<CR>
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-g> :Grep 
 vnoremap <C-g> "ay:call ExecWithHistory("Grep " . @a)<CR>
-vnoremap <C-h> "ay:%s/<C-r>a//g<left><left><left>
+vnoremap <C-h> "ay:%s/<C-r>a//gc<left><left><left>
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 cnoremap <C-f> :History:<CR>
@@ -150,6 +145,7 @@ ab #i #include
 ab #n #ifndef
 ab #e #endif
 
+" grep
 command! -nargs=+ Grep execute 'silent grep! "<args>"' | botright cope
 autocmd TermOpen * setlocal nonumber norelativenumber
 augroup BgHighlight
@@ -158,13 +154,13 @@ augroup BgHighlight
     autocmd WinLeave * set nocul
 augroup END
 
-if executable('ag')
+if executable('rg')
     " Note we extract the column as well as the file and line number
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
     set grepformat=%f:%l:%c:%m
 endif
 
-
+" custom functions
 function! Edit()
     exec "!explorer.exe `wslpath -w %:p`"
 endfun
@@ -222,6 +218,7 @@ autocmd BufNewFile,BufRead *.uxml set filetype=xml
 let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'artifacts', 'build', 'Art', 'Library']
 
-" SRP / C#
-set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
-au FileType hlsl set includeexpr=substitute(v:fname,'Packages','..','g')
+" server stuff
+if !empty($UNITY_PROJ)
+    source /tmp/$UNITY_PROJ/vimrc
+endif

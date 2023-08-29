@@ -22,7 +22,7 @@ fi
 
 if [[ $SELECTION =~ $STDPAC ]]; then
     echo "\n== Installing standard packages =="
-    brew install the_silver_searcher python3
+    brew install ripgrep python3
 fi
 
 if [[ $SELECTION =~ $ALLPAC ]]; then
