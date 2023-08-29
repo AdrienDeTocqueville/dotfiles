@@ -45,7 +45,7 @@ set foldlevel=99
 
 set completeopt=menu " disable preview window
 let g:ale_linters = { 'cs': ['OmniSharp'] }
-"let g:ale_virtualtext_cursor = 'disabled'
+let g:ale_virtualtext_cursor = 'disabled'
 
 set ai
 set si
@@ -71,6 +71,7 @@ set norelativenumber
 set inccommand=nosplit
 au FocusGained * :checktime
 
+filetype on
 filetype plugin on
 
 hi clear CursorLine
@@ -110,17 +111,17 @@ nnoremap <C-p> :cp<CR>
 cnoremap <C-f> :History:<CR>
 
 " Tags (f13 = shift+f1, f25 = ctrl+f1)
-nnoremap <F1>  :UndotreeToggle<CR>:UndotreeFocus<CR>
 nnoremap <F13> :TagbarToggle<CR>
-nnoremap <F2>  :call ExecWithHistory("tj " . expand("<cword>"))<CR>
-nnoremap <F14> :call ExecWithHistory("tj " . @*)<CR>
-nnoremap <F26> :call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F3>  :sp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
-nnoremap <F15> :vsp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
-nnoremap <F27> :vsp<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
-nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
-nnoremap <F16> :tab split<CR>:call ExecWithHistory("tj " . @*)<CR>:execute "normal! zz"<CR>
-nnoremap <F28> :tab split<CR>:call ExecWithHistory("tag " . expand("<cword>"))<CR>
+nnoremap <F25>  :UndotreeToggle<CR>:UndotreeFocus<CR>
+
+function! DefaultTags()
+    nnoremap <F2>  :call ExecWithHistory("tj " . expand("<cword>"))<CR>
+    nnoremap <F3>  :sp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+    nnoremap <F15> :vsp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+    nnoremap <F4>  :tab split<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
+    inoremap <C-n> <C-n>
+endfun
+call DefaultTags()
 
 " ...
 nnoremap <F5> :checktime<CR>

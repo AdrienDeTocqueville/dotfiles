@@ -3,11 +3,67 @@
 # Arguments to setup in Unity preferences
 # -p $(ProjectPath) -f $(File) -l $(Line) -c $(Column)
 
-import sys, getopt, os, time
-import json, db
+# test command
+# ./unity_open.py -p /Users/adrien/source/projects/test_trunk -f /Users/adrien/source/unity/Packages/com.unity.render-pipelines.high-definition/Editor/AssemblyInfo.cs -l 2 -c 2; cat /tmp/unipy.log
+
+import sys, getopt, os, time, json
 import logging
 
 NVIM="/opt/homebrew/bin/nvim"
+
+PROJECT_FILE = """#!/bin/zsh
+rm -rf /tmp/{project}/links
+mkdir -p /tmp/{project}/links
+{symlinks}
+cd {path}
+echo -n -e "\033]0;{project} - Unity\007"
+touch {session_file}
+UNITY_PROJ={project} nvim -S {session_file} --listen {vim_socket}
+exit
+"""
+
+VIMRC = """
+let g:ctrlp_user_command = 'rg -L --files /tmp/{project}/links'
+let g:ctrlp_follow_symlinks=1
+command! -nargs=+ Grep execute 'silent grep! "<args>" /tmp/{project}/links' | botright cope
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ -L
+set expandtab tabstop=4 foldmarker={{,}} foldmethod=marker foldlevelstart=99 foldlevel=99
+set path+={pkg_path}
+au BufEnter *.cs :call OmniTags()
+au BufLeave *.cs :call DefaultTags()
+function! OmniTags()
+    nnoremap <F1>  :OmniSharpFindUsages<CR>
+    nnoremap <F2>  :OmniSharpGotoDefinition<CR>
+    nnoremap <F14>  :OmniSharpPreviewDefinition<CR>
+    nnoremap <F3>  :sp<CR>:OmniSharpGotoDefinition<CR>
+    nnoremap <F15> :vsp<CR>:OmniSharpGotoDefinition<CR>
+    nnoremap <F4>  :tab split<CR>:OmniSharpGotoDefinition<CR>
+    inoremap <C-n> <C-x><C-o>
+endfun
+autocmd VimLeavePre * :call DeleteHiddenBuffers()
+autocmd VimLeavePre * mksession! {session_file}
+"""
+
+def create_symlink(src, dst):
+    return f"\nln -sf {src}/ /tmp/{project}/links/{dst}"
+def try_add_package(packages, name):
+    if not name in packages:
+        return ""
+    path = packages[name].split(':')
+    if path[0] == "file":
+        return create_symlink(path[1], name)
+    return ""
+def find_path(packages):
+    path = packages["com.unity.render-pipelines.core"].split(':')
+    if path[0] == "file":
+        return os.path.dirname(os.path.dirname(path[1]))
+    return ""
+def file_exists(path):
+    try:
+        os.stat(vim_socket)
+        return True
+    except FileNotFoundError:
+        return False
 
 logging.basicConfig(filename='/tmp/unipy.log',
                     filemode='w',
@@ -34,56 +90,15 @@ for o, a in opts:
     elif o == "-c":
         column = a
 
-db.parse_db()
+vim_socket = f"/tmp/{project}/socket"
+project_file = f"/tmp/{project}/init.sh"
+session_file = f"/tmp/{project}/session.vim"
 
-# Verify project is still valid
-if project in db.DB:
-    try:
-        os.stat(db.DB[project])
-    except FileNotFoundError:
-        logging.info(f"clearing existing project...")
-
-        db.DB.pop(project)
-        db.write_db()
-        pass
-
-PROJECT_FILE = """#!/bin/zsh
-rm -rf /tmp/{project}/links
-mkdir -p /tmp/{project}/links
-{symlinks}
-cd {path}
-echo -n -e "\033]0;{project} - Unity\007"
-touch {session_file}
-UNITY_PROJ={project} nvim -S {session_file}
-exit
-"""
-
-VIMRC = """
-silent exec '!python3 ~/.vim/db.py {project} open ' . serverlist()[0]
-let g:ctrlp_user_command = 'rg -L --files /tmp/{project}/links'
-let g:ctrlp_follow_symlinks=1
-command! -nargs=+ Grep execute 'silent grep! "<args>" /tmp/{project}/links' | botright cope
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ -L
-set expandtab tabstop=4 foldmarker={{,}} foldmethod=marker foldlevelstart=99 foldlevel=99
-au FileType hlsl set includeexpr=substitute(v:fname,'Packages','..','g')
-autocmd VimLeavePre * exec '!python3 ~/.vim/db.py {project} close'
-autocmd VimLeavePre * call DeleteHiddenBuffers()
-autocmd VimLeavePre mksession! {session_file}
-"""
-
-def create_symlink(src, dst):
-    return f"\nln -sf {src}/ /tmp/{project}/links/{dst}"
-def try_add_package(packages, name):
-    if not name in packages:
-        return ""
-    path = packages[name].split(':')
-    if path[0] == "file":
-        return create_symlink(path[1], name)
-    return ""
-
-# Open new project
-if not project in db.DB:
-    logging.info(f"parsing manifest...")
+# Verify if project is open or create it
+if file_exists(vim_socket):
+    logging.info("project already open...")
+else:
+    logging.info(f"creating project {project}...")
 
     symlinks = create_symlink(path + "/Assets", "Assets");
 
@@ -93,29 +108,24 @@ if not project in db.DB:
     symlinks += try_add_package(packages, "com.unity.render-pipelines.high-definition")
     f.close()
 
-    logging.info(f"new project {project}...")
+    pkg_path = find_path(packages)
+
     os.system(f"mkdir -p /tmp/{project}")
 
-    project_file = f"/tmp/{project}/init.sh"
-    session_file = f"/tmp/{project}/session.vim"
-
     f = open(project_file, "w+")
-    f.write(PROJECT_FILE.format(path=path, project=project, session_file=session_file, symlinks=symlinks))
+    f.write(PROJECT_FILE.format(path=path, project=project, session_file=session_file, symlinks=symlinks, vim_socket=vim_socket))
     f.close();
     f = open(f"/tmp/{project}/vimrc", "w+")
-    f.write(VIMRC.format(project=project, session_file=session_file, path=path))
+    f.write(VIMRC.format(project=project, session_file=session_file, path=path, pkg_path=pkg_path))
     f.close();
 
     os.system(f"chmod +x {project_file}; open {project_file} -a iTerm")
 
-    while not project in db.DB:
+    # Give some time to vim
+    while not file_exists(vim_socket):
         time.sleep(0.1)
-        db.parse_db()
-else:
-    logging.info(f"project already open...")
 
 # Send command
-socket = db.DB[project]
 cmd = ""
 if file is not None:
     file = file.replace(' ','\ ')
@@ -125,7 +135,7 @@ if line is not None:
 if column is not None:
     cmd += f"{column}|"
 
-cmd = f"{NVIM} --server {socket} --remote-send '{cmd}'"
+cmd = f"{NVIM} --server {vim_socket} --remote-send '{cmd}'"
 ret = os.system(cmd)
 
 logging.info(f"{cmd}")

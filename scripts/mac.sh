@@ -16,7 +16,7 @@ if [[ $SELECTION =~ $EXTRC ]]; then
     echo "\n== Creating ~/.extrc config =="
 
     echo "vim() { nvim -O \$* }" > ~/.extrc
-    echo "alias rp='cd /mnt/; vim'" >> ~/.extrc
+    echo "alias rp='cd /Users/adrien/source/unity/Packages/com.unity.render-pipelines.high-definition/; vim'" >> ~/.extrc
     echo "export SYSTEM=$SYSTEM" >> ~/.extrc
 fi
 
