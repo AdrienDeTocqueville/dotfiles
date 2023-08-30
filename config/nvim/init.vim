@@ -18,6 +18,7 @@ endif
 " LSP
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
+"Plug 'puremourning/vimspector'
 " Tmux
 " Plug 'wellle/tmux-complete.vim'
 " Plug 'christoomey/vim-tmux-navigator'
@@ -42,10 +43,6 @@ set mouse=a
 set foldmethod=syntax
 set foldlevelstart=99
 set foldlevel=99
-
-set completeopt=menu " disable preview window
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-let g:ale_virtualtext_cursor = 'disabled'
 
 set ai
 set si
@@ -223,3 +220,8 @@ let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestPr
 if !empty($UNITY_PROJ)
     source /tmp/$UNITY_PROJ/vimrc
 endif
+
+set completeopt=menu " disable preview window
+let g:ale_linters = { 'cs': ['OmniSharp'] }
+let g:ale_virtualtext_cursor = 'disabled'
+let g:vimspector_enable_mappings="HUMAN"

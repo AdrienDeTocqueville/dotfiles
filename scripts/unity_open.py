@@ -22,13 +22,15 @@ UNITY_PROJ={project} nvim -S {session_file} --listen {vim_socket}
 exit
 """
 
+#UNITY_PROJ={project} GIT_DIR={git_dir} nvim -S {session_file} --listen {vim_socket}
+
 VIMRC = """
-let g:ctrlp_user_command = 'rg -L --files /tmp/{project}/links'
+let g:ctrlp_user_command = 'rg -L --ignore-file ~/.ignore --files /tmp/{project}/links'
 let g:ctrlp_follow_symlinks=1
 command! -nargs=+ Grep execute 'silent grep! "<args>" /tmp/{project}/links' | botright cope
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ -L
 set expandtab tabstop=4 foldmarker={{,}} foldmethod=marker foldlevelstart=99 foldlevel=99
-set path+={pkg_path}
+set path+={git_dir}
 au BufEnter *.cs :call OmniTags()
 au BufLeave *.cs :call DefaultTags()
 function! OmniTags()
@@ -108,15 +110,15 @@ else:
     symlinks += try_add_package(packages, "com.unity.render-pipelines.high-definition")
     f.close()
 
-    pkg_path = find_path(packages)
+    git_dir = find_path(packages)
 
     os.system(f"mkdir -p /tmp/{project}")
 
     f = open(project_file, "w+")
-    f.write(PROJECT_FILE.format(path=path, project=project, session_file=session_file, symlinks=symlinks, vim_socket=vim_socket))
+    f.write(PROJECT_FILE.format(path=path, project=project, session_file=session_file, git_dir=git_dir, symlinks=symlinks, vim_socket=vim_socket))
     f.close();
     f = open(f"/tmp/{project}/vimrc", "w+")
-    f.write(VIMRC.format(project=project, session_file=session_file, path=path, pkg_path=pkg_path))
+    f.write(VIMRC.format(project=project, session_file=session_file, path=path, git_dir=git_dir))
     f.close();
 
     os.system(f"chmod +x {project_file}; open {project_file} -a iTerm")

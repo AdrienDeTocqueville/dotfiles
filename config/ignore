@@ -1,10 +1,14 @@
 /artifacts/
 /build/
 **/Tests/
-Samples~/
 
 *.assets
-Assets/(?!.+\.cs$).+$
-
+*.shadergraph
+*.unity
+*.mat
 *.meta
+*.prefab
+
+*.fbx
+*.ttf
 *.png
