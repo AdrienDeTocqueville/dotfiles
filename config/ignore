@@ -1,14 +1,27 @@
-/artifacts/
-/build/
+artifacts/
+build/
+Library/
+**/Library/
 **/Tests/
 
-*.assets
+*.json
+*.bytes
+
+*.asmref
+*.asmdef
+*.lighting
+*.asset
 *.shadergraph
+*.shadersubgraph
 *.unity
 *.mat
 *.meta
 *.prefab
 
+*.fsh
+*.obj
+*.OBJ
+*.mtl
 *.fbx
 *.ttf
 *.png

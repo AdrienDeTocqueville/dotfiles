@@ -35,8 +35,6 @@ colorscheme OceanicNext
 "hi TabLine ctermfg=15 ctermbg=242
 "hi TabLineSel cterm=underline ctermbg=0 ctermfg=7
 hi Comment ctermfg=28
-hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\t\|\(\s\+$\)/
 
 set clipboard+=unnamed
 set mouse=a
@@ -92,11 +90,12 @@ nnoremap go :call Reveal()<CR><CR>
 vnoremap p "_dP
 
 nnoremap - :tabe ~/.vimrc<CR>
+nnoremap è /enable_d3d11<CR>_xx:w<CR>
 
+let g:ctrlp_working_path_mode = 'a'
 if is_git_repo
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
-let g:ctrlp_working_path_mode = 'a'
 nnoremap <C-f> :CtrlP<CR>
 
 nnoremap <C-t> :tabe %<CR>
@@ -112,6 +111,7 @@ nnoremap <F13> :TagbarToggle<CR>
 nnoremap <F25>  :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 function! DefaultTags()
+    nnoremap <F1>  :call ExecWithHistory("Grep " . expand("<cword>"))<CR>
     nnoremap <F2>  :call ExecWithHistory("tj " . expand("<cword>"))<CR>
     nnoremap <F3>  :sp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
     nnoremap <F15> :vsp<CR>:call ExecWithHistory("tj " . expand("<cword>"))<CR>
@@ -209,19 +209,35 @@ function! Hexdump()
 endfun
 
 " Syntax
-autocmd BufNewFile,BufRead *.shader,*.compute,*.cginc,*.template,*.usf,*.ush set filetype=hlsl
+autocmd BufNewFile,BufRead *.shader,*.compute,*.cginc,*.template,*.usf,*.ush,*.raytrace set filetype=hlsl
 autocmd BufNewFile,BufRead *.mat set filetype=yaml
 autocmd BufNewFile,BufRead *.uss set filetype=css
 autocmd BufNewFile,BufRead *.uxml set filetype=xml
 let b:match_words = '\s*#\s*region.*$:\s*#\s*endregion'
 let gutentags_ctags_exclude+=['.yamato', '.github', 'LocalTestProjects', 'TestProjects', 'Tools', 'Samples~', 'Documentation~', '*.Migration.cs', 'Documentation', 'artifacts', 'build', 'Art', 'Library']
 
-" server stuff
+" Unity project setup
 if !empty($UNITY_PROJ)
+    hi ExtraWhitespace ctermbg=red guibg=red
+    match ExtraWhitespace /\t\|\(\s\+$\)/
+    set expandtab tabstop=4 foldmarker={,} foldmethod=marker foldlevelstart=99 foldlevel=99
+
+    set completeopt=menu " disable preview window
+    let g:ale_linters = { 'cs': ['OmniSharp'] }
+    let g:ale_virtualtext_cursor = 'disabled'
+    let g:vimspector_enable_mappings="HUMAN"
+
+    au BufEnter *.cs :call OmniTags()
+    au BufLeave *.cs :call DefaultTags()
+    function! OmniTags()
+        nnoremap <F1>  :OmniSharpFindUsages<CR>
+        nnoremap <F2>  :OmniSharpGotoDefinition<CR>
+        nnoremap <F14>  :OmniSharpPreviewDefinition<CR>
+        nnoremap <F3>  :sp<CR>:OmniSharpGotoDefinition<CR>
+        nnoremap <F15> :vsp<CR>:OmniSharpGotoDefinition<CR>
+        nnoremap <F4>  :tab split<CR>:OmniSharpGotoDefinition<CR>
+        inoremap <C-n> <C-x><C-o>
+    endfun
+
     source /tmp/$UNITY_PROJ/vimrc
 endif
-
-set completeopt=menu " disable preview window
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-let g:ale_virtualtext_cursor = 'disabled'
-let g:vimspector_enable_mappings="HUMAN"
