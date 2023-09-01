@@ -26,10 +26,13 @@ exit
 
 #UNITY_PROJ={project} GIT_DIR={git_dir} nvim -S {session_file} --listen {vim_socket}
 
+#nnoremap <C-f> :CtrlP /tmp/{project}/links<CR>
+#let g:ctrlp_follow_symlinks=1
+#let g:ctrlp_user_command = '{SEARCH} {SEARCH_FOLLOW} {SEARCH_IGNORE} ~/.ignore {SEARCH_FILES} /tmp/{project}/links'
+
 VIMRC = """
-nnoremap <C-f> :CtrlP /tmp/{project}/links<CR>
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_user_command = '{SEARCH} {SEARCH_FOLLOW} {SEARCH_IGNORE} ~/.ignore {SEARCH_FILES} /tmp/{project}/links'
+nnoremap <C-f> :call fzf#run({{'source': "{SEARCH} {SEARCH_FOLLOW} {SEARCH_IGNORE} ~/.ignore {SEARCH_FILES}", 'sink': 'e', 'top': '40%', 'options': '-e', 'dir': '/tmp/{project}/links/'}})<CR>
+nnoremap <C-g> :call fzf#vim#grep2("{SEARCH} {SEARCH_FOLLOW} {SEARCH_IGNORE} ~/.ignore --smart-case {GREP_PARAMS} -- ", "", fzf#vim#with_preview({{'dir': '/tmp/{project}/links'}}))<CR>
 command! -nargs=+ Grep execute 'silent grep! "<args>" /tmp/{project}/links' | botright cope
 set grepprg={SEARCH}\ --vimgrep\ --no-heading\ --smart-case\ {SEARCH_FOLLOW}\ {SEARCH_IGNORE}\ ~/.ignore
 set path+={git_dir}
@@ -93,8 +96,9 @@ session_file = f"/tmp/{project}/session.vim"
 NVIM = "nvim" if is_wsl() else "/opt/homebrew/bin/nvim"
 SEARCH = 'ag' if is_wsl() else 'rg'
 SEARCH_IGNORE = "-p" if is_wsl() else "--ignore-file"
-SEARCH_FILES = "--nobreak --print-all-files" if is_wsl() else "--files"
+SEARCH_FILES = f"--nobreak --print-all-files /tmp/{project}/links" if is_wsl() else "--files"
 SEARCH_FOLLOW = "-f" if is_wsl() else "-L"
+GREP_PARAMS = "--noheading" if is_wsl() else "--no-heading --color=always"
 
 # Verify if project is open or create it
 if file_exists(vim_socket):
@@ -119,7 +123,7 @@ else:
     f.close();
     f = open(f"/tmp/{project}/vimrc", "w+")
     f.write(VIMRC.format(project=project, session_file=session_file, path=path, git_dir=git_dir,\
-        SEARCH=SEARCH, SEARCH_FOLLOW=SEARCH_FOLLOW, SEARCH_IGNORE=SEARCH_IGNORE, SEARCH_FILES=SEARCH_FILES))
+        SEARCH=SEARCH, SEARCH_FOLLOW=SEARCH_FOLLOW, SEARCH_IGNORE=SEARCH_IGNORE, SEARCH_FILES=SEARCH_FILES, GREP_PARAMS=GREP_PARAMS))
     f.close();
 
     os.system(f"chmod +x {project_file}")

@@ -9,7 +9,9 @@ Plug 'mbbill/undotree'
 " Git
 Plug 'tpope/vim-fugitive'
 " Search
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 " Tags
 if $CONTEXT_MENU != "1"
 Plug 'ludovicchabant/vim-gutentags'
@@ -92,11 +94,14 @@ vnoremap p "_dP
 nnoremap - :tabe ~/.vimrc<CR>
 nnoremap è /enable_d3d11<CR>_xx:w<CR>
 
+" Search
 let g:ctrlp_working_path_mode = 'a'
 if is_git_repo
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
+
 nnoremap <C-f> :CtrlP<CR>
+nnoremap <C-f> :FZF<CR>
 
 nnoremap <C-t> :tabe %<CR>
 nnoremap <C-g> :Grep 

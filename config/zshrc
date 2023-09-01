@@ -59,7 +59,7 @@ alias gc="git checkout"
 alias gl="git pull"
 alias gp="git push"
 
-if [[ $SYSTEM == "MAC" ]] ; then
+if [[ $(uname) == "Darwin" ]] ; then
     alias ls="\ls -lh --color=always"
 else
     alias ls="\ls -lh --color=tty --time-style=+'  %d %b %Y %H:%M '"
