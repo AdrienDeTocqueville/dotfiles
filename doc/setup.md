@@ -2,6 +2,13 @@
 
 Exec `wsl.sh`
 
+# Mac
+
+```bash
+defaults write com.apple.dock "autohide-time-modifier" -float "0" && killall Dock
+defaults write com.apple.finder "ShowPathbar" -bool "true" && killall Finder
+```
+
 # Arch
 
 Exec `arch.sh`
