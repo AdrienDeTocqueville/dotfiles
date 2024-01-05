@@ -135,6 +135,7 @@ Extensions:
 ### Vimium
 Excluded:
 `https?://www.youtube.com/watch*` - `fjklm`
+`https?://github.cds.internal.unity3d.com/*` - `b`
 
 Custom mappings:
 `map <c-d> scrollPageDown`
