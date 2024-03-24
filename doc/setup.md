@@ -10,20 +10,36 @@ Exec `arch.sh`
 
 ```bash
 pacman -S sudo
-visudo /etc/sudoers
+visudo
+> root ALL=(ALL) ALL
+> %wheel ALL=(ALL) ALL
+> Defaults rootpw
 ```
+
+## Groups group
+
+list groups: `getent group`
+list groups of current user: `groups`
+create group: `groupadd wheel`
+
+## Create user
 
 ```bash
 useradd otarie --create-home
 passwd otarie
+sudo usermod -a -G wheel otarie
+```
+
+## Auto mount drive
+
+Add line in /etc/fstab
+```
+UUID=8C86DCCF86DCBAC2	/data	auto	nosuid,nodev,nofail,fmask=0022,dmask=0022	0 0
 ```
 
 ## Infos
 
 Core dumps are located in `/var/lib/systemd/coredump/`
-#### Fonts
-- FiraCode / FiraMono (nerd-fonts-fira-mono on aur)
-- gucharmap or this https://github.com/wstam88/rofi-fontawesome to browse font characters
 
 ## General purpose packages
 
@@ -47,6 +63,11 @@ WiFi:
  * nmtui
  * networkmanager
  * wpa_supplicant
+
+## Fonts
+- FiraCode / FiraMono: `yay -S nerd-fonts-fira-mono`
+- `pacman -S ttf-nerd-fonts-symbol`
+- gucharmap or this https://github.com/wstam88/rofi-fontawesome to browse font characters
 
 ## pacman
 

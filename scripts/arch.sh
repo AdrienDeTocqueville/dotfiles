@@ -93,7 +93,7 @@ if [[ $SELECTION =~ $CFG ]]; then
 	ln -s ~/.config/xorg/xorg.conf /etc/X11/xorg.conf
 
 	# clock
-	systemctl start systemd-timesync.service
+	systemctl start systemd-timesyncd.service
 	cat <<- END > /etc/systemd/timesyncd.conf
 		[Time]
 		NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
