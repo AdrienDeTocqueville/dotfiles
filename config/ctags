@@ -1,2 +1,2 @@
---langmap=C#:+.hlsl.shader.compute.cginc
+--langmap=C#:+.hlsl.shader.compute.cginc.usf.ush
 --langmap=C++:+.vert.frag

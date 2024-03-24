@@ -19,10 +19,13 @@ if [ -d "/mnt/d/Softwares" ] ; then
 BINDIR="/mnt/d/Softwares"
 else
 BINDIR="/mnt/c/Softwares"
+mkdir $BINDIR
 fi
 
 APPDATA=$(echo "$PATH" | grep -o "[^:]*Microsoft/WindowsApps*")
 APPDATA="$APPDATA/../.."
+
+WINHOME=$(wslpath "$(wslvar USERPROFILE)")
 
 echo "BINDIR=" $BINDIR
 echo "APPDATA=" $APPDATA
@@ -37,29 +40,33 @@ if [[ $SELECTION =~ $EXTRC ]]; then
 		alias open="explorer.exe"
 		alias dot="cd ~/dotfiles"
 		alias doc="vim ~/dotfiles/doc/setup.md"
+		
+		alias rp="cd /mnt/; vim"
 
-		export PATH="$PATH:$BINDIR"
+		export PATH="\$PATH:$BINDIR"
+		export WINHOME=$WINHOME
 		export SYSTEM=$SYSTEM
 	END
+fi
+
+if [[ $SELECTION =~ $STDPAC ]]; then
+	echo "\n== Installing common packages =="
+	sudo apt install -y unzip silversearcher-ag
 fi
 
 if [[ $SELECTION =~ $CFG ]]; then
 	echo "\n== Setting up config =="
 
 	~/dotfiles/scripts/setup_symlinks.sh
-	ln -s ~/dotfiles/scripts/open_with_nvim  ~/.open_with_nvim
 	\cp ~/dotfiles/config/settings.json $APPDATA/Packages/Microsoft.WindowsTerminal*/LocalState
+	\cp ~/dotfiles/config/bashrc $WINHOME/.bashrc
+	\cp ~/dotfiles/config/gitignore $WINHOME/.gitignore
 
-	curl -fLo /tmp/FiraCode.zip https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
-	unzip /tmp/FiraCode.zip -d /tmp/FiraCode
-	mkdir $APPDATA/Temp/ttf
-	mv /tmp/FiraCode/ttf/FiraCode-Regular.ttf $APPDATA/Temp/ttf
-	explorer.exe $(wslpath -w $APPDATA/Temp/ttf)
-fi
-
-if [[ $SELECTION =~ $STDPAC ]]; then
-	echo "\n== Installing common packages =="
-	sudo apt install -y unzip silversearcher-ag
+	#curl -fLo /tmp/FiraCode.zip https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
+	#unzip /tmp/FiraCode.zip -d /tmp/FiraCode
+	#mkdir $APPDATA/Temp/ttf
+	#mv /tmp/FiraCode/ttf/FiraCode-Regular.ttf $APPDATA/Temp/ttf
+	#explorer.exe $(wslpath -w $APPDATA/Temp/ttf)
 fi
 
 if [[ $SELECTION =~ $NEOVIM ]]; then
@@ -68,6 +75,9 @@ if [[ $SELECTION =~ $NEOVIM ]]; then
 	curl -fLo /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
 	tar xzf /tmp/nvim.tar.gz -C /tmp
 	mv /tmp/nvim-linux64 ~/.nvim
+
+	# Vi bindings
+	#git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
 
 	#echo "\n\n\n\nExec :PlugInstall in neovim to install plugins"
 	#exec zsh
@@ -90,3 +100,5 @@ if [[ $SELECTION =~ $GIT ]]; then
 		sudo ln -s $BINDIR/Git/bin/git.exe  /bin/git
 	fi
 fi
+
+echo "\nInstallation complete, please restart your shell"

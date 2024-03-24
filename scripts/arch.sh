@@ -91,6 +91,7 @@ if [[ $SELECTION =~ $CFG ]]; then
 	cp ~/.config/xorg/custom.map /usr/share/kbd/keymaps/
 	echo KEYMAP=custom >> /etc/vconsole.conf
 	ln -s ~/.config/xorg/xorg.conf /etc/X11/xorg.conf
+	ln -s ~/dotfiles/config/xorg/40-libinput.conf /usr/share/X11/xorg.conf.d/40-libinput.conf
 
 	# clock
 	systemctl start systemd-timesyncd.service

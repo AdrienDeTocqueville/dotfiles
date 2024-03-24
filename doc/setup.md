@@ -2,6 +2,13 @@
 
 Exec `wsl.sh`
 
+# Mac
+
+```bash
+defaults write com.apple.dock "autohide-time-modifier" -float "0" && killall Dock
+defaults write com.apple.finder "ShowPathbar" -bool "true" && killall Finder
+```
+
 # Arch
 
 Exec `arch.sh`
@@ -40,6 +47,10 @@ UUID=8C86DCCF86DCBAC2	/data	auto	nosuid,nodev,nofail,fmask=0022,dmask=0022	0 0
 ## Infos
 
 Core dumps are located in `/var/lib/systemd/coredump/`
+
+#### Fonts
+- FiraCode / FiraMono (nerd-fonts-fira-mono on aur)
+- gucharmap or this https://github.com/wstam88/rofi-fontawesome to browse font characters
 
 ## General purpose packages
 
@@ -98,6 +109,10 @@ Init second monitor as extend (default is duplicate)
 xrandr --output HDMI2 --auto --above eDP1
 ```
 
+### Orientation
+
+xrandr --orientation 1
+
 ## Screen capture
 
 ```bash
@@ -144,6 +159,7 @@ Extensions:
 ### Vimium
 Excluded:
 `https?://www.youtube.com/watch*` - `fjklm`
+`https?://github.cds.internal.unity3d.com/*` - `b`
 
 Custom mappings:
 `map <c-d> scrollPageDown`

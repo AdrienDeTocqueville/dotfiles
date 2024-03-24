@@ -4,19 +4,19 @@
     ls = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -20 --stat=200
 
 [user]
-	email = adrien.detocqueville@gmail.com
-	name = Adrien de Tocqueville
+    email = adrien.detocqueville@gmail.com
+    name = Adrien de Tocqueville
 [core]
-	autocrlf = false
-	eol = lf
-	editor = ~/nvim/usr/bin/nvim
-	excludesfile = ~/.gitignore
+    autocrlf = false
+    eol = lf
+    editor = nvim
+    excludesfile = ~/.gitignore
 [credential]
-	helper = store
+    helper = store
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
