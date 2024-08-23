@@ -149,17 +149,30 @@ bluetoothctl
 > connect <MAC>
 ```
 
-## Opera
+# Browser
 
-Extensions:
+## Extensions
+
  * Privacy Badger
  * uBlock Origin
  * Vimium
+ * RSS Feed Reeder
 
-### Vimium
+## Vimium
 Excluded:
 `https?://www.youtube.com/watch*` - `fjklm`
 `https?://github.cds.internal.unity3d.com/*` - `b`
 
 Custom mappings:
 `map <c-d> scrollPageDown`
+
+## Vivaldi
+
+See `profile path` at [vivaldi://about/]()
+
+Toolbar settings are in preferences file:
+```
+"web":{"elements":[{"activeUrl":"https://www.wikipedia.org/","faviconUrl":"https://www.wikipedia.org/","faviconUrlValid":true,"id":"WEBPANEL_ckn7fhhqx0000hc2roo8jshm4","mobileMode":true,"title":"Wikipedia","url":"https://wikipedia.org","zoom":1},{"activeUrl":"https://web.whatsapp.com/","faviconUrl":"https://web.whatsapp.com/","faviconUrlValid":true,"id":"WEBPANEL_bfcb0f5f-2449-4342-8e5b-4973fa45a6a3","mobileMode":false,"origin":"user","resizable":false,"title":"WhatsApp","url":"https://web.whatsapp.com/","width":816,"zoom":1},{"activeUrl":"https://www.deezer.com/fr/","faviconUrl":"https://www.deezer.com/fr/","faviconUrlValid":true,"id":"WEBPANEL_f00992bf-f6a4-4e03-b7f6-fecbf088415e","mobileMode":false,"origin":"user","resizable":false,"title":"Deezer - Flow - Télécharge & Écoute ta Musique | Streaming Gratuit","url":"http://deezer.com/","width":493.164,"zoom":1},{"activeUrl":"https://www.deepl.com/en/translator#fr/en-us/couette%20et%20oreiller","faviconUrl":"https://www.deepl.com/en/translator#fr/en-us/couette%20et%20oreiller","faviconUrlValid":true,"id":"WEBPANEL_0b5a40e2-47e9-48bd-8bc3-1edb3c6db789","mobileMode":false,"origin":"user","resizable":false,"title":"DeepL Translate: The world's most accurate translator","url":"http://deepl.com/","width":-1,"zoom":1},{"activeUrl":"https://www.messenger.com/e2ee/t/8240661252659665/","faviconUrl":"https://www.messenger.com/e2ee/t/8240661252659665/","faviconUrlValid":true,"id":"WEBPANEL_6244f19e-cbfb-449e-af61-d53e8939dfa6","mobileMode":false,"origin":"user","resizable":false,"title":"Messenger","url":"http://messenger.com/","width":-1,"zoom":1}]
+
+"toolbars":{"panel":["FlexibleSpacer","PanelMail","PanelCalendar","PanelTasks","PanelFeeds","PanelContacts","WEBPANEL_6244f19e-cbfb-449e-af61-d53e8939dfa6","WEBPANEL_bfcb0f5f-2449-4342-8e5b-4973fa45a6a3","WEBPANEL_0b5a40e2-47e9-48bd-8bc3-1edb3c6db789","WEBPANEL_ckn7fhhqx0000hc2roo8jshm4","WEBPANEL_f00992bf-f6a4-4e03-b7f6-fecbf088415e","PanelWeb","FlexibleSpacer","PanelNotes","PanelBookmarks","PanelHistory","PanelDownloads","PanelWindow"]}
+```
