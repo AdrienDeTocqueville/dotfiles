@@ -1,2 +1,15 @@
 set guifont=Consolas:h11
 set guioptions=
+
+set backspace=indent,eol,start
+
+" Don't use windows clipboard cause it sucks
+"set clipboard=unnamed
+noremap Y :vsc edit.copy<CR>"0yy
+noremap yy :vsc edit.copy<CR>"0yy
+vnoremap y :vsc edit.copy<CR>"0y<ESC>
+noremap d "*d
+noremap dd "*dd
+noremap D "*D
+noremap p "*p
+noremap P "*P
