@@ -3,6 +3,8 @@ set guioptions=
 
 set backspace=indent,eol,start
 
+noremap gd :vsc edit.gotodefinition<CR>
+
 " Don't use windows clipboard cause it sucks
 "set clipboard=unnamed
 noremap Y :vsc edit.copy<CR>"0yy
