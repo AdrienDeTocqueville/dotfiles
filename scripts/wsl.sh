@@ -72,9 +72,9 @@ fi
 if [[ $SELECTION =~ $NEOVIM ]]; then
 	echo "\n== Installing Neovim =="
 
-	curl -fLo /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+	curl -fLo /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
 	tar xzf /tmp/nvim.tar.gz -C /tmp
-	mv /tmp/nvim-linux64 ~/.nvim
+	mv /tmp/nvim-linux-x86_64 ~/.nvim
 
 	# Vi bindings
 	#git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
